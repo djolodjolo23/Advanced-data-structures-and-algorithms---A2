@@ -1,5 +1,7 @@
 package problem1;
 
+import java.util.NoSuchElementException;
+
 public class MyDeque<AnyType> {
 
     private static class Node<AnyType> {
@@ -59,9 +61,29 @@ public class MyDeque<AnyType> {
         modCount++;
     }
 
-    public void removeFirst() {}
+    public void removeFirst() {
+        if (isEmpty()) {
+            throw new NoSuchElementException("The deque is empty, nothing to remove!");
+        } else {
+            head.next = head.next.next;
+            head.next.prev = head;
 
-    public void removeLast() {}
+            size--;
+            modCount++;
+        }
+    }
+
+    public void removeLast() {
+        if (isEmpty()) {
+            throw new NoSuchElementException("The deque is empty, nothing to remove!");
+        } else {
+            tail.prev = tail.prev.prev;
+            tail.prev.next = tail;
+
+            size--;
+            modCount++;
+        }
+    }
 
 
 

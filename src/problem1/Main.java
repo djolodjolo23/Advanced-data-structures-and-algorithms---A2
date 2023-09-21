@@ -7,8 +7,20 @@ public class Main {
         MyDeque <Integer> myDeque = new MyDeque<>();
 
         myDeque.addFirst(1);
-        myDeque.addLast(2);
-        myDeque.addFirst(4);
+
+        myDeque.addFirst(2);
+        myDeque.addFirst(3);
+
+        myDeque.addLast(123);
+
+        myDeque.removeFirst();
+
+        myDeque.removeLast();
+
+
+
+
+
 
         System.out.println(myDeque.getSize());
 
