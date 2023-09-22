@@ -1,9 +1,11 @@
 package problem2;
 
+import java.util.Iterator;
+
 public class Main {
 
     public static void main(String[] args) {
-        RandomizedQueue<Integer> rq = new RandomizedQueue<>();
+        RandomizedQueue rq = new RandomizedQueue();
 
 
         rq.enqueue(1);
@@ -11,6 +13,7 @@ public class Main {
         rq.enqueue(2);
         rq.enqueue(3);
         rq.enqueue(1);
+
 
 
 

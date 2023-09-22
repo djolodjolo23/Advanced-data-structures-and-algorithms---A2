@@ -25,7 +25,7 @@ public class MyDeque<AnyType> implements Iterable<AnyType>{
     Node<AnyType> head;
     Node<AnyType> tail;
 
-    private int size;
+    private int theSize;
     private int modCount = 0;
 
     public MyDeque() {
@@ -36,16 +36,16 @@ public class MyDeque<AnyType> implements Iterable<AnyType>{
         head = new Node<>(null, null, null);
         tail = new Node<>(null, head, null);
         head.next = tail;
-        size = 0;
+        theSize = 0;
         modCount++;
     }
 
-    public int getSize() {
-        return size;
+    public int size() {
+        return theSize;
     }
 
     public boolean isEmpty() {
-        return getSize() == 0;
+        return size() == 0;
     }
 
     public void addFirst(AnyType x) {
@@ -53,7 +53,7 @@ public class MyDeque<AnyType> implements Iterable<AnyType>{
         head.next.prev = newNode;
         head.next = newNode;
 
-        size++;
+        theSize++;
         modCount++;
     }
 
@@ -63,7 +63,7 @@ public class MyDeque<AnyType> implements Iterable<AnyType>{
         tail.prev.next = newNode;
         tail.prev = newNode;
 
-        size++;
+        theSize++;
         modCount++;
     }
 
@@ -74,7 +74,7 @@ public class MyDeque<AnyType> implements Iterable<AnyType>{
             head.next = head.next.next;
             head.next.prev = head;
 
-            size--;
+            theSize--;
             modCount++;
         }
     }
@@ -86,7 +86,7 @@ public class MyDeque<AnyType> implements Iterable<AnyType>{
             tail.prev = tail.prev.prev;
             tail.prev.next = tail;
 
-            size--;
+            theSize--;
             modCount++;
         }
     }

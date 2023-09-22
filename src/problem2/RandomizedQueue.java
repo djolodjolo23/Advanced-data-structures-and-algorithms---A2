@@ -1,20 +1,18 @@
 package problem2;
 
-import problem1.MyDeque;
-
 import java.util.Iterator;
 import java.util.Random;
 
-public class RandomizedQueue<AnyType> implements Iterable<AnyType>{
+public class RandomizedQueue implements Iterable<Integer>{
 
     private int[] queue = new int[]{};
 
-    private Random random;
+    private final Random random;
 
-    private int size;
+    private int theSize;
 
     public RandomizedQueue() {
-        this.size = 0;
+        this.theSize = 0;
         random = new Random();
     }
 
@@ -23,6 +21,7 @@ public class RandomizedQueue<AnyType> implements Iterable<AnyType>{
         System.arraycopy(queue, 0, newQueue, 0, queue.length);
         newQueue[newQueue.length - 1] = node;
         queue = newQueue;
+        theSize++;
     }
 
     public int dequeue() {
@@ -37,12 +36,21 @@ public class RandomizedQueue<AnyType> implements Iterable<AnyType>{
 
         System.arraycopy(queue, 0, newQueue, 0, queue.length - 1); // copying everything except the last one;
         queue = newQueue;
+        theSize--;
         return removedElement;
     }
 
+    public int size() {
+        return theSize;
+    }
+
+    public boolean isEmpty() {
+        return size() == 0;
+    }
+
     @Override
-    public Iterator<AnyType> iterator() {
-        return new RandomizedQueueIterator<>();
+    public Iterator<Integer> iterator() {
+        return new RandomizedQueueIterator(this);
     }
 
 
@@ -50,6 +58,10 @@ public class RandomizedQueue<AnyType> implements Iterable<AnyType>{
         for (int n : queue) {
             System.out.println(n);
         }
+    }
+
+    public int[] getQueue() {
+        return queue;
     }
 
 }
