@@ -1,6 +1,9 @@
 package problem1;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Spliterator;
+import java.util.function.Consumer;
 
 public class MyDeque<AnyType> {
 
@@ -13,6 +16,25 @@ public class MyDeque<AnyType> {
             this.data = data;
             this.prev = prev;
             this.next = next;
+        }
+    }
+
+    private static class MyIterator<AnyType> implements Iterable<AnyType> {
+
+        private Node firstPos;
+        @Override
+        public Iterator<AnyType> iterator() {
+            return new Iterator<>() {
+                @Override
+                public boolean hasNext() {
+                    return false;
+                }
+
+                @Override
+                public AnyType next() {
+                    return null;
+                }
+            };
         }
     }
 
