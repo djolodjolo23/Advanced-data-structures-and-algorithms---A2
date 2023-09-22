@@ -2,12 +2,15 @@ package problem1;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import java.util.Spliterator;
-import java.util.function.Consumer;
 
-public class MyDeque<AnyType> {
+public class MyDeque<AnyType> implements Iterable<AnyType>{
 
-    private static class Node<AnyType> {
+    @Override
+    public Iterator<AnyType> iterator() {
+        return new DequeIterator<>(this);
+    }
+
+    static class Node<AnyType> {
         public AnyType data;
         public Node<AnyType> prev;
         public Node<AnyType> next;
@@ -19,27 +22,9 @@ public class MyDeque<AnyType> {
         }
     }
 
-    private static class MyIterator<AnyType> implements Iterable<AnyType> {
 
-        private Node firstPos;
-        @Override
-        public Iterator<AnyType> iterator() {
-            return new Iterator<>() {
-                @Override
-                public boolean hasNext() {
-                    return false;
-                }
-
-                @Override
-                public AnyType next() {
-                    return null;
-                }
-            };
-        }
-    }
-
-    private Node<AnyType> head;
-    private Node<AnyType> tail;
+    Node<AnyType> head;
+    Node<AnyType> tail;
 
     private int size;
     private int modCount = 0;
@@ -105,6 +90,10 @@ public class MyDeque<AnyType> {
             size--;
             modCount++;
         }
+    }
+
+    public int getModCount() {
+        return modCount;
     }
 
 

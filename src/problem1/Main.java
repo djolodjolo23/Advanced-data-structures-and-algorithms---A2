@@ -1,5 +1,7 @@
 package problem1;
 
+import java.util.Iterator;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -13,16 +15,11 @@ public class Main {
 
         myDeque.addLast(123);
 
-        myDeque.removeFirst();
-
-        myDeque.removeLast();
-
-
+        for (Integer integer : myDeque) {
+            System.out.println(integer);
+        }
 
 
-
-
-        System.out.println(myDeque.getSize());
 
     }
 }
