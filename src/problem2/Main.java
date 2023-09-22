@@ -12,7 +12,11 @@ public class Main {
         rq.enqueue(3);
         rq.enqueue(1);
 
+
+
         rq.printQueue();
+        System.out.println();
+        int removed = rq.dequeue();
     }
 
 
