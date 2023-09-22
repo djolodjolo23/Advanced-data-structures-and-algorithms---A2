@@ -2,8 +2,7 @@ package problem1;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import java.util.Spliterator;
-import java.util.function.Consumer;
+
 
 public class DequeIterator<AnyType> implements Iterator<AnyType>{
 
