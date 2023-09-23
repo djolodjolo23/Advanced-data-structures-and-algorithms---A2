@@ -1,26 +1,23 @@
 package problem2;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Random;
 
 public class RandomizedQueueIterator implements Iterator<Integer> {
 
-    private RandomizedQueue randomizedQueue;
     private int[] copiedQueue;
-    private int currentPos;
 
     private Random random;
     public RandomizedQueueIterator(RandomizedQueue randomizedQueue) {
         random = new Random();
-        this.randomizedQueue = randomizedQueue;
-        copiedQueue = randomizedQueue.getQueue();
-        currentPos = random.nextInt(randomizedQueue.size());
+        copiedQueue = Arrays.copyOf(randomizedQueue.getQueue(), randomizedQueue.size());
     }
 
     @Override
     public boolean hasNext() {
-        return false;
+        return copiedQueue.length > 0;
     }
 
     @Override
@@ -28,9 +25,18 @@ public class RandomizedQueueIterator implements Iterator<Integer> {
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
-        int currentIndex = random.nextInt(randomizedQueue.size());
-        int choosenNum = copiedQueue[currentIndex];
 
-        return choosenNum;
+        if (copiedQueue.length == 1) {
+            int chosenNum = copiedQueue[0];
+            copiedQueue = new int[0]; // Empty array
+            return chosenNum;
+        } else {
+            int randomIndex = random.nextInt(copiedQueue.length);
+            int chosenNum = copiedQueue[randomIndex];
+            copiedQueue[randomIndex] = copiedQueue[copiedQueue.length - 1];
+            copiedQueue = Arrays.copyOf(copiedQueue, copiedQueue.length - 1);
+            return chosenNum;
+        }
     }
+
 }

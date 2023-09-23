@@ -32,9 +32,11 @@ public class RandomizedQueue implements Iterable<Integer>{
 
         int randomIndex = random.nextInt(queue.length);
         int removedElement = queue[randomIndex];
-        queue[randomIndex] = queue[queue.length - 1];
-
-        System.arraycopy(queue, 0, newQueue, 0, queue.length - 1); // copying everything except the last one;
+        for (int i = 0, j = 0; i < queue.length; i++) {
+            if (i != randomIndex) {
+                newQueue[j++] = queue[i];
+            }
+        }
         queue = newQueue;
         theSize--;
         return removedElement;
