@@ -12,7 +12,8 @@ public class Main {
 
 
 
-        String path = "C:/Users/dimit";
+        String path = "C:/Users/dimit/tree_testing";
         Tree tree = new Tree(path);
+        System.out.println();
     }
 }

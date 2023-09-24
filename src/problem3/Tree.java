@@ -56,21 +56,23 @@ public class Tree {
             TreeNode rootNode = new TreeNode(parentDir.getName());
             nodes.add(rootNode);
         }
+        if (elements == null) {
+            System.err.println("Failed to list files in "+ parentDir.getName());
+            return;
+        }
         TreeNode currentNode = nodes.get(nodes.size()-1);
         if (elements.length != 0) {
             currentNode.setFirstChild(elements[0].getName());
         }
         for (int i = 0; i < elements.length; i++) {
             File first = elements[i];
-
             TreeNode treeNode1 = new TreeNode(first.getName());
             nodes.add(treeNode1);
-            if (first.isFile() && i != elements.length - 1) {
+            if (i != elements.length - 1) {
                 File second = elements[i + 1];
-                TreeNode treeNode2 = new TreeNode(second.getName());
                 treeNode1.setRightSibling(second.getName());
-                nodes.add(treeNode2);
             }
+
             if (first.isDirectory()) {
                 build2(first.getPath());
             }
