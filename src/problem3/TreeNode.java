@@ -9,25 +9,18 @@ public class TreeNode {
 
     public TreeNode(String name){
         this.name = name;
+        this.firstChild = null;
+        this.rightSibling = null;
     }
 
-    public TreeNode(String name, String firstChild) {
-        this.name = name;
-        this.firstChild = firstChild;
-    }
-
-    public TreeNode(String name, String firstChild, String rightSibling) {
-        this.name = name;
-        this.firstChild = firstChild;
-        this.rightSibling = rightSibling;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public void setFirstChild(String firstChild) {
         this.firstChild = firstChild;
+    }
+
+
+    public String getName() {
+        return name;
     }
 
     public void setRightSibling(String rightSibling) {
