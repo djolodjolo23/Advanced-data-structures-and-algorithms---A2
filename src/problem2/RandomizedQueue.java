@@ -56,12 +56,6 @@ public class RandomizedQueue implements Iterable<Integer>{
     }
 
 
-    public void printQueue() {
-        for (int n : queue) {
-            System.out.println(n);
-        }
-    }
-
     public int[] getQueue() {
         return queue;
     }

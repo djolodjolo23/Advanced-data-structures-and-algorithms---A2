@@ -6,10 +6,10 @@ import java.util.NoSuchElementException;
 
 public class DequeIterator<AnyType> implements Iterator<AnyType>{
 
-    private MyDeque<AnyType> deque;
-    private MyDeque.Node<AnyType> currentNode;
+    private Deque<AnyType> deque;
+    private Deque.Node<AnyType> currentNode;
 
-    public DequeIterator(MyDeque<AnyType> deque) {
+    public DequeIterator(Deque<AnyType> deque) {
         this.deque = deque;
         this.currentNode = deque.head.next;
     }

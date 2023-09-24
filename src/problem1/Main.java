@@ -4,16 +4,16 @@ public class Main {
 
     public static void main(String[] args) {
 
-        MyDeque <Integer> myDeque = new MyDeque<>();
+        Deque<Integer> deque = new Deque<>();
 
-        myDeque.addFirst(1);
+        deque.addFirst(1);
 
-        myDeque.addFirst(2);
-        myDeque.addFirst(3);
+        deque.addFirst(2);
+        deque.addFirst(3);
 
-        myDeque.addLast(123);
+        deque.addLast(123);
 
-        for (Integer integer : myDeque) {
+        for (Integer integer : deque) {
             System.out.println(integer);
         }
 

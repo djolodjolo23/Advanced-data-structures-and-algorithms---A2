@@ -2,7 +2,7 @@ package problem1;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class MyDeque<AnyType> implements Iterable<AnyType>{
+public class Deque<AnyType> implements Iterable<AnyType>{
 
     @Override
     public Iterator<AnyType> iterator() {
@@ -28,7 +28,7 @@ public class MyDeque<AnyType> implements Iterable<AnyType>{
     private int theSize;
     private int modCount = 0;
 
-    public MyDeque() {
+    public Deque() {
         doClear();
     }
 

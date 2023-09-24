@@ -10,6 +10,7 @@ public class RandomizedQueueIterator implements Iterator<Integer> {
     private int[] copiedQueue;
 
     private Random random;
+
     public RandomizedQueueIterator(RandomizedQueue randomizedQueue) {
         random = new Random();
         copiedQueue = Arrays.copyOf(randomizedQueue.getQueue(), randomizedQueue.size());
@@ -25,10 +26,9 @@ public class RandomizedQueueIterator implements Iterator<Integer> {
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
-
         if (copiedQueue.length == 1) {
             int chosenNum = copiedQueue[0];
-            copiedQueue = new int[0]; // Empty array
+            copiedQueue = new int[0]; // when the queue is empty
             return chosenNum;
         } else {
             int randomIndex = random.nextInt(copiedQueue.length);
