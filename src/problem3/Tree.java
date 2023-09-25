@@ -8,17 +8,11 @@ import java.util.Scanner;
 
 public class Tree {
 
-    private String rootPath;
     private List<TreeNode> nodes;
 
     public Tree(String rootPath) {
         nodes = new ArrayList<>();
         this.buildTree(rootPath);
-        this.rootPath = rootPath;
-    }
-
-    public List<TreeNode> getNodes() {
-        return nodes;
     }
 
     public void buildTree(String inputPath) {
@@ -107,8 +101,7 @@ public class Tree {
         }
         File[] elements = parentDir.listFiles();
         System.out.println("Provide the file name: ");
-       // String fileName = scanner.nextLine();
-        String fileName = "4_inserting.txt"; // testing
+        String fileName = scanner.nextLine();
         File newFile = new File(parentDir, fileName);
         try {
             if (newFile.createNewFile()) {
