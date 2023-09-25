@@ -46,6 +46,26 @@ public class Tree {
         }
     }
 
+    public void printTree() {
+        if (nodes.isEmpty()) {
+            System.out.println("The tree is empty");
+        } else {
+           TreeNode root = nodes.get(0);
+           printNode(root, 0);
+        }
+    }
+
+    private void printNode(TreeNode node, int depth) {
+        System.out.println(" ".repeat(Math.max(0, depth)) + node.getName());
+        TreeNode child = getNodeByName(node.getFirstChild());
+        while (child != null) {
+            printNode(child, depth);
+            child = getNodeByName(child.getRightSibling());
+        }
+    }
+
+
+
     public void directoryCheck(File file, TreeNode treeNode) {
         treeNode.setDirectory(file.isDirectory());
     }
@@ -70,6 +90,7 @@ public class Tree {
         }
         return treeNode;
     }
+
 
     public void walkThroughFolders() {
         for (TreeNode tn : nodes) {

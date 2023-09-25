@@ -13,13 +13,17 @@ public class Main {
 
 
 
-        String path = "C:/Users/dimit/tree_testing";
+        Scanner scanner = new Scanner(System.in);
+        String path = scanner.nextLine();
 
         Tree tree = new Tree(path);
 
         tree.walkThroughTree();
-        tree.addChild();
-        tree.walkThroughTree();
+
+
+        TreeNode tn = tree.getNodeByName("2");
+        System.out.println(tn.toString());
+
 
     }
 }

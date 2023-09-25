@@ -38,8 +38,25 @@ public class TreeNode {
         return directory;
     }
 
+    public String getFirstChild() {
+        return firstChild;
+    }
+
+    public String getRightSibling() {
+        return rightSibling;
+    }
+
     public void setRightSibling(String rightSibling) {
         this.rightSibling = rightSibling;
     }
 
+    @Override
+    public String toString() {
+        return "TreeNode{" +
+                "name='" + name + '\'' +
+                ", firstChild='" + firstChild + '\'' +
+                ", rightSibling='" + rightSibling + '\'' +
+                ", absolutePath='" + absolutePath + '\'' +
+                '}';
+    }
 }
