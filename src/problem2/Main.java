@@ -13,9 +13,8 @@ public class Main {
         rq.enqueue(3);
         rq.enqueue(41);
 
-        Iterator<Integer> it = rq.iterator();
-        while (it.hasNext()) {
-            System.out.println(it.next());
+        for (Integer integer : rq) {
+            System.out.println(integer);
         }
 
 

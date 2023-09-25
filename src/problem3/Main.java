@@ -14,10 +14,12 @@ public class Main {
 
 
         String path = "C:/Users/dimit/tree_testing";
+
         Tree tree = new Tree(path);
-        List<TreeNode> nodes = tree.getNodes();
-        for (TreeNode n : nodes) {
-            System.out.println(n.getName());
-        }
+
+        tree.walkThroughTree();
+        tree.addChild();
+        tree.walkThroughTree();
+
     }
 }

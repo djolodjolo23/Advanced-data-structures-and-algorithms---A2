@@ -4,13 +4,16 @@ public class TreeNode {
 
     private String name;
     private String firstChild;
-
     private String rightSibling;
+    private boolean directory;
 
-    public TreeNode(String name){
+    private String absolutePath;
+
+    public TreeNode(String name, String absolutePath){
         this.name = name;
         this.firstChild = null;
         this.rightSibling = null;
+        this.absolutePath = absolutePath;
     }
 
 
@@ -21,6 +24,18 @@ public class TreeNode {
 
     public String getName() {
         return name;
+    }
+
+    public String getAbsolutePath() {
+        return absolutePath;
+    }
+
+    public void setDirectory(boolean directory) {
+        this.directory = directory;
+    }
+
+    public boolean isDirectory() {
+        return directory;
     }
 
     public void setRightSibling(String rightSibling) {
