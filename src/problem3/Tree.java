@@ -74,8 +74,7 @@ public class Tree implements Iterable<TreeNode> {
     }
 
 
-    public void addChild() {
-        Scanner scanner = new Scanner(System.in);
+    public void addChild(Scanner scanner) {
         System.out.println("Provide the file to add a child, choose one from the top list: ");
         String folderName = scanner.nextLine();
         File parentDir = new File(getAbsolutePathOfANode(folderName));

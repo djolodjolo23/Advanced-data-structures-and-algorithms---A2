@@ -1,5 +1,6 @@
 package problem3;
 import java.util.Iterator;
+import java.util.Scanner;
 
 
 public class Main {
@@ -8,7 +9,10 @@ public class Main {
 
 
 
-        String path = "C:/Users/dimit/tree_testing";
+        Scanner scanner = new Scanner(System.in);
+        //String path = "C:/Users/dimit/tree_testing";
+        System.out.println("Provide the path of the root folder: ");
+        String path = scanner.nextLine();
 
         Tree tree = new Tree(path);
 
@@ -16,7 +20,7 @@ public class Main {
         while (it.hasNext()) {
             System.out.println(it.next().getName());
         }
-        tree.addChild();
+        //tree.addChild(scanner);
 
         System.out.println("");
     }
