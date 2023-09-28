@@ -6,11 +6,11 @@ public class Main {
 
 
         var bst = new BinarySearchTree<Integer>();
-        bst.insert(1);
-        bst.insert(5);
-        bst.insert(6);
-        bst.insert(2);
-
+        bst.add(1);
+        bst.add(5);
+        bst.add(6);
+        bst.add(2);
+        bst.remove(6);
         System.out.println(bst.contains(6));
     }
 }
