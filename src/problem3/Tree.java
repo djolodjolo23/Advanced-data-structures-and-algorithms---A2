@@ -107,7 +107,7 @@ public class Tree implements Iterable<TreeNode> {
 
     @Override
     public Iterator<TreeNode> iterator() {
-        return new TreeIterator(rootNode, false);
+        return new IteratorPostOrder(rootNode);
     }
 
     public TreeNode findTreeNode(String name) {
