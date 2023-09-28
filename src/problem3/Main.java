@@ -10,9 +10,9 @@ public class Main {
 
 
         Scanner scanner = new Scanner(System.in);
-        //String path = "C:/Users/dimit/tree_testing";
+        String path = "C:/Users/dimit/tree_testing";
         System.out.println("Provide the path of the root folder: ");
-        String path = scanner.nextLine();
+        //String path = scanner.nextLine();
 
         Tree tree = new Tree(path);
 
