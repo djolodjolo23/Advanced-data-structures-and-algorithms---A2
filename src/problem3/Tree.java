@@ -20,6 +20,16 @@ public class Tree implements Iterable<TreeNode> {
         myIterator = iterator();
     }
 
+    /**
+     * The iterator for the Binary search tree.
+     * @return can be Post, Pre.
+     * TODO: Change the return object to iterator of your choice for testing.
+     */
+    @Override
+    public Iterator<TreeNode> iterator() {
+        return new IteratorPOSTOrder(rootNode);
+    }
+
 
     public void buildTree(String inputPath) {
         File parentDir = new File(String.valueOf(inputPath));
@@ -103,11 +113,6 @@ public class Tree implements Iterable<TreeNode> {
             TreeNode childNode = findTreeNode(elements[elements.length - 1].getName());
             childNode.setRightSibling(newNode);
         }
-    }
-
-    @Override
-    public Iterator<TreeNode> iterator() {
-        return new IteratorPOSTOrder(rootNode);
     }
 
     public TreeNode findTreeNode(String name) {

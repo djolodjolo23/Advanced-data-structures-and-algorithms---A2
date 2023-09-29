@@ -12,6 +12,11 @@ import java.util.NoSuchElementException;
  */
 public class BinarySearchTree <AnyType extends Comparable<? super AnyType>> implements Iterable<AnyType>{
 
+    /**
+     * The iterator for the Binary search tree.
+     * @return can be any iterator, In, Post, Pre.
+     * TODO: Change the return object to iterator of your choice for testing.
+     */
     @Override
     public Iterator<AnyType> iterator() {
         return new IteratorINOrder<>(this);
@@ -90,10 +95,9 @@ public class BinarySearchTree <AnyType extends Comparable<? super AnyType>> impl
 
     private void removeKthLargestElement(int kth_largest_el, BinaryNode<AnyType> t) {
         Iterator<AnyType> it = new IteratorINOrder<>(this);
-        int diff = theSize - kth_largest_el;
         int count = 0;
         AnyType element = null;
-        while (it.hasNext() && count <= diff) {
+        while (it.hasNext() && count <= theSize - kth_largest_el) {
             element = it.next();
             count++;
         }
