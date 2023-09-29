@@ -19,10 +19,8 @@ public class Main {
         int height = bst.getTheHeight(8);
         System.out.println("Height: " + height);
 
-        Iterator<Integer> it = bst.iterator();
-
-        while (it.hasNext()) {
-            System.out.println(it.next());
+        for (Integer integer : bst) {
+            System.out.println(integer);
         }
 
         bst.removeKthLargestElement(5);

@@ -90,10 +90,9 @@ public class BinarySearchTree <AnyType extends Comparable<? super AnyType>> impl
     }
 
     public void removeKthLargestElement(int kth_largest_el) {
-        removeKthLargestElement(kth_largest_el, root);
-    }
-
-    private void removeKthLargestElement(int kth_largest_el, BinaryNode<AnyType> t) {
+        if (kth_largest_el > theSize) {
+            throw new NoSuchElementException("K value is larger of the tree size, please try with a smaller K value.");
+        }
         Iterator<AnyType> it = new IteratorINOrder<>(this);
         int count = 0;
         AnyType element = null;
