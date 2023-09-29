@@ -1,5 +1,12 @@
 package problem4;
 
+
+/**
+ * The binary search tree class.
+ * A lot of the code is taken from the book examples on how it should be implemented.
+ *
+ * @param <AnyType> can be any data type of tree nodes.
+ */
 public class BinarySearchTree <AnyType extends Comparable<? super AnyType>>{
 
     private static class BinaryNode<AnyType> {
@@ -17,8 +24,17 @@ public class BinarySearchTree <AnyType extends Comparable<? super AnyType>>{
 
     private BinaryNode<AnyType> root;
 
+    private int theSize;
+
+    private int theHeight;
+
+    private int heightTemp;
+
     public BinarySearchTree() {
         this.root = null;
+        theSize = 0;
+        theHeight = 0;
+        heightTemp = 1;
     }
 
     public void add(AnyType x) {
@@ -39,6 +55,14 @@ public class BinarySearchTree <AnyType extends Comparable<? super AnyType>>{
 
     public void remove(AnyType x) {
         root = remove(x, root);
+    }
+
+    public int size() {
+        return theSize;
+    }
+
+    public int height() {
+        return theHeight;
     }
 
 
@@ -62,14 +86,24 @@ public class BinarySearchTree <AnyType extends Comparable<? super AnyType>>{
      */
     private BinaryNode<AnyType> add(AnyType x, BinaryNode<AnyType> t) {
         if (t == null) {
+            theSize++;
             return new BinaryNode<>(x, null, null); // no more nodes to traverse
         }
         int compareResult = x.compareTo(t.element);
         if (compareResult < 0) {
+            heightTemp++;
+            if (theHeight < heightTemp) {
+                theHeight = heightTemp;
+            }
             t.left = add(x, t.left);
         } else if (compareResult > 0) {
+            heightTemp++;
+            if (theHeight < heightTemp) {
+                theHeight = heightTemp;
+            }
             t.right = add(x, t.right);
         }
+        heightTemp = 1;
         return t;
     }
 
@@ -84,7 +118,7 @@ public class BinarySearchTree <AnyType extends Comparable<? super AnyType>>{
 
     private BinaryNode<AnyType> findMax(BinaryNode<AnyType> t) {
         if (t != null) {
-            while (t.right != null) {
+            while (t.right != null) { // can be also done recursively as with findMin()
                 t = t.right;
             }
         }
@@ -105,6 +139,7 @@ public class BinarySearchTree <AnyType extends Comparable<? super AnyType>>{
             t.right = remove(t.element, t.right);
         } else {
             t = (t.left != null) ? t.left : t.right;
+            theSize--;
         }
         return t;
     }
