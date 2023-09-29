@@ -2,6 +2,7 @@ package problem4;
 
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * The binary search tree class.
@@ -33,15 +34,10 @@ public class BinarySearchTree <AnyType extends Comparable<? super AnyType>> impl
 
     private int theSize;
 
-    private int theHeight;
-
-    private int heightTemp;
 
     public BinarySearchTree() {
         this.root = null;
         theSize = 0;
-        theHeight = 0;
-        heightTemp = 1;
     }
 
     public void add(AnyType x) {
@@ -68,19 +64,34 @@ public class BinarySearchTree <AnyType extends Comparable<? super AnyType>> impl
         return theSize;
     }
 
-    public int height() {
-        return theHeight;
+
+    private BinaryNode<AnyType> findNode(AnyType x) {
+        return findNode2(x, root);
     }
+
+    private BinaryNode<AnyType> findNode2(AnyType x, BinaryNode<AnyType> t) {
+        if (t == null) {
+            throw new NoSuchElementException("The element does not exist. Cannot find the height of a non existing element.");
+        }
+        int compareResult = x.compareTo(t.element);
+        if (compareResult < 0) {
+            return findNode2(x, t.left);
+        } else if (compareResult > 0) {
+            return findNode2(x, t.right);
+        } else {
+            return t;
+        }
+    }
+
 
     public int getTheHeight(AnyType x) {
-        return getTheHeight(x);
-    }
-
-    private int getTheHeight(BinaryNode<AnyType> t) {
-        if (t == null) {
+        BinaryNode<AnyType> start = findNode(x);
+        if (start.element == null) {
             return -1;
         }
-        return Math.max(getTheHeight(t.left), getTheHeight(t.right)) + 1;
+        int leftHeight = (start.left == null) ? -1 : getTheHeight(start.left.element);
+        int rightHeight = (start.right == null) ? -1 : getTheHeight(start.right.element);
+        return Math.max(leftHeight, rightHeight) + 1;
     }
 
     private boolean contains(AnyType x, BinaryNode<AnyType> t) {
@@ -108,19 +119,10 @@ public class BinarySearchTree <AnyType extends Comparable<? super AnyType>> impl
         }
         int compareResult = x.compareTo(t.element);
         if (compareResult < 0) {
-            heightTemp++;
-            if (theHeight < heightTemp) {
-                theHeight = heightTemp;
-            }
             t.left = add(x, t.left);
         } else if (compareResult > 0) {
-            heightTemp++;
-            if (theHeight < heightTemp) {
-                theHeight = heightTemp;
-            }
             t.right = add(x, t.right);
         }
-        heightTemp = 1;
         return t;
     }
 

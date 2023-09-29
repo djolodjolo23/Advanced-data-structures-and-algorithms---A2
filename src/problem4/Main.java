@@ -16,6 +16,8 @@ public class Main {
         bst.add(9);
         bst.add(11);
 
+        int height = bst.getTheHeight(8);
+        System.out.println("Height: " + height);
 
         Iterator<Integer> it = bst.iterator();
 
@@ -24,11 +26,15 @@ public class Main {
         }
 
 
-        bst.remove(1);
-        bst.remove(2);
         bst.remove(4);
+        bst.remove(10);
+        bst.remove(3);
+        bst.remove(5);
+        bst.remove(9);
+        bst.remove(11);
+        height = bst.getTheHeight(7);
+        System.out.println("Height: " + height);
         System.out.println(bst.contains(2));
         System.out.println(bst.size());
-        System.out.println(bst.height());
     }
 }
