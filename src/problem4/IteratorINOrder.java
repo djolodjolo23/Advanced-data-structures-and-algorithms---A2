@@ -1,20 +1,18 @@
 package problem4;
 
-import problem3.TreeNode;
-
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 import java.util.Stack;
 
-public class IteratorPostOrder<AnyType extends Comparable<? super AnyType>> implements Iterator<AnyType> {
+public class IteratorINOrder<AnyType extends Comparable<? super AnyType>> implements Iterator<AnyType> {
+
     private Stack<BinarySearchTree.BinaryNode<AnyType>> stack;
 
     private BinarySearchTree.BinaryNode<AnyType> root;
 
-    public IteratorPostOrder(BinarySearchTree<AnyType> bst) {
+    public IteratorINOrder(BinarySearchTree<AnyType> bst) {
         this.stack = new Stack<>();
         this.root = bst.root;
-        postOrderFix(root);
+        inOrderFix(root);
     }
     @Override
     public boolean hasNext() {
@@ -26,12 +24,12 @@ public class IteratorPostOrder<AnyType extends Comparable<? super AnyType>> impl
         return stack.pop().element;
     }
 
-    private void postOrderFix(BinarySearchTree.BinaryNode<AnyType> node) {
+    private void inOrderFix(BinarySearchTree.BinaryNode<AnyType> node) {
         if (node == null) {
             return;
         }
-        postOrderFix(node.right);
+        inOrderFix(node.right);
         stack.push(node);
-        postOrderFix(node.left);
+        inOrderFix(node.left);
     }
 }

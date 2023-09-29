@@ -14,7 +14,7 @@ public class BinarySearchTree <AnyType extends Comparable<? super AnyType>> impl
 
     @Override
     public Iterator<AnyType> iterator() {
-        return new IteratorPreOrder<>(this);
+        return new IteratorPREOrder<>(this);
     }
 
     static class BinaryNode<AnyType> {
@@ -66,18 +66,19 @@ public class BinarySearchTree <AnyType extends Comparable<? super AnyType>> impl
 
 
     private BinaryNode<AnyType> findNode(AnyType x) {
-        return findNode2(x, root);
+        return findNode(x, root);
     }
 
-    private BinaryNode<AnyType> findNode2(AnyType x, BinaryNode<AnyType> t) {
+
+    private BinaryNode<AnyType> findNode(AnyType x, BinaryNode<AnyType> t) {
         if (t == null) {
             throw new NoSuchElementException("The element does not exist. Cannot find the height of a non existing element.");
         }
         int compareResult = x.compareTo(t.element);
         if (compareResult < 0) {
-            return findNode2(x, t.left);
+            return findNode(x, t.left);
         } else if (compareResult > 0) {
-            return findNode2(x, t.right);
+            return findNode(x, t.right);
         } else {
             return t;
         }

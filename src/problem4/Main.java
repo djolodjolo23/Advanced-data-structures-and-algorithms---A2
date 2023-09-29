@@ -25,15 +25,6 @@ public class Main {
             System.out.println(it.next());
         }
 
-
-        bst.remove(4);
-        bst.remove(10);
-        bst.remove(3);
-        bst.remove(5);
-        bst.remove(9);
-        bst.remove(11);
-        height = bst.getTheHeight(7);
-        System.out.println("Height: " + height);
         System.out.println(bst.contains(2));
         System.out.println(bst.size());
     }

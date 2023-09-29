@@ -4,12 +4,12 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Stack;
 
-public class IteratorPreOrder<AnyType extends Comparable<? super AnyType>> implements Iterator<AnyType> {
+public class IteratorPREOrder<AnyType extends Comparable<? super AnyType>> implements Iterator<AnyType> {
     private Stack<BinarySearchTree.BinaryNode<AnyType>> stack;
 
     private BinarySearchTree.BinaryNode<AnyType> root;
 
-    public IteratorPreOrder(BinarySearchTree<AnyType> bst) {
+    public IteratorPREOrder(BinarySearchTree<AnyType> bst) {
         this.stack = new Stack<>();
         root = bst.root;
         stack.push(root);
