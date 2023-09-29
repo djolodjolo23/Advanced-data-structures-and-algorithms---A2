@@ -17,9 +17,9 @@ public class BinarySearchTree <AnyType extends Comparable<? super AnyType>> impl
     }
 
     static class BinaryNode<AnyType> {
-        protected AnyType element;
-        protected BinaryNode<AnyType> left;
-        protected BinaryNode<AnyType> right;
+        AnyType element;
+        BinaryNode<AnyType> left;
+        BinaryNode<AnyType> right;
 
         BinaryNode(AnyType element) {
             this(element, null, null);
