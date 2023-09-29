@@ -25,6 +25,7 @@ public class Main {
             System.out.println(it.next());
         }
 
+        bst.removeKthLargestElement(5);
         System.out.println(bst.contains(2));
         System.out.println(bst.size());
     }

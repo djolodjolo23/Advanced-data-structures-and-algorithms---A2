@@ -14,7 +14,7 @@ public class BinarySearchTree <AnyType extends Comparable<? super AnyType>> impl
 
     @Override
     public Iterator<AnyType> iterator() {
-        return new IteratorPREOrder<>(this);
+        return new IteratorINOrder<>(this);
     }
 
     static class BinaryNode<AnyType> {
@@ -82,6 +82,22 @@ public class BinarySearchTree <AnyType extends Comparable<? super AnyType>> impl
         } else {
             return t;
         }
+    }
+
+    public void removeKthLargestElement(int kth_largest_el) {
+        removeKthLargestElement(kth_largest_el, root);
+    }
+
+    private void removeKthLargestElement(int kth_largest_el, BinaryNode<AnyType> t) {
+        Iterator<AnyType> it = new IteratorINOrder<>(this);
+        int diff = theSize - kth_largest_el;
+        int count = 0;
+        AnyType element = null;
+        while (it.hasNext() && count <= diff) {
+            element = it.next();
+            count++;
+        }
+        remove(element);
     }
 
 

@@ -4,11 +4,11 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Stack;
 
-public class IteratorPreOrder implements Iterator<TreeNode> {
+public class IteratorPREOrder implements Iterator<TreeNode> {
 
     private Stack<TreeNode> stack;
 
-    public IteratorPreOrder(TreeNode root) {
+    public IteratorPREOrder(TreeNode root) {
         this.stack = new Stack<>();
         stack.push(root);
     }

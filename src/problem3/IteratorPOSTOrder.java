@@ -1,14 +1,13 @@
 package problem3;
 
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 import java.util.Stack;
 
-public class IteratorPostOrder implements Iterator<TreeNode> {
+public class IteratorPOSTOrder implements Iterator<TreeNode> {
 
     private Stack<TreeNode> stack;
 
-    public IteratorPostOrder(TreeNode root) {
+    public IteratorPOSTOrder(TreeNode root) {
         this.stack = new Stack<>();
         postOrderFix(root);
     }
