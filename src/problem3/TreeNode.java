@@ -9,8 +9,6 @@ public class TreeNode {
 
     public String absolutePath;
 
-
-
     public TreeNode(String name, String absolutePath){
         this.name = name;
         this.absolutePath = absolutePath;

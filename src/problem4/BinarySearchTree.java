@@ -1,18 +1,25 @@
 package problem4;
 
 
+import java.util.Iterator;
+
 /**
  * The binary search tree class.
  * A lot of the code is taken from the book examples on how it should be implemented.
  *
  * @param <AnyType> can be any data type of tree nodes.
  */
-public class BinarySearchTree <AnyType extends Comparable<? super AnyType>>{
+public class BinarySearchTree <AnyType extends Comparable<? super AnyType>> implements Iterable<AnyType>{
 
-    private static class BinaryNode<AnyType> {
-        AnyType element;
-        BinaryNode<AnyType> left;
-        BinaryNode<AnyType> right;
+    @Override
+    public Iterator<AnyType> iterator() {
+        return new IteratorPreOrder<>(this);
+    }
+
+    static class BinaryNode<AnyType> {
+        protected AnyType element;
+        protected BinaryNode<AnyType> left;
+        protected BinaryNode<AnyType> right;
 
         BinaryNode(AnyType element) {
             this(element, null, null);
@@ -22,7 +29,7 @@ public class BinarySearchTree <AnyType extends Comparable<? super AnyType>>{
         }
     }
 
-    private BinaryNode<AnyType> root;
+    BinaryNode<AnyType> root;
 
     private int theSize;
 
@@ -65,6 +72,16 @@ public class BinarySearchTree <AnyType extends Comparable<? super AnyType>>{
         return theHeight;
     }
 
+    public int getTheHeight(AnyType x) {
+        return getTheHeight(x);
+    }
+
+    private int getTheHeight(BinaryNode<AnyType> t) {
+        if (t == null) {
+            return -1;
+        }
+        return Math.max(getTheHeight(t.left), getTheHeight(t.right)) + 1;
+    }
 
     private boolean contains(AnyType x, BinaryNode<AnyType> t) {
         if (t == null) {
