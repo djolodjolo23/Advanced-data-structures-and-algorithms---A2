@@ -22,10 +22,10 @@ public class BinarySearchTree <AnyType extends Comparable<? super AnyType>> impl
         return new IteratorINOrder<>(this);
     }
 
-    static class BinaryNode<AnyType> {
-        AnyType element;
-        BinaryNode<AnyType> left;
-        BinaryNode<AnyType> right;
+    public static class BinaryNode<AnyType> { // made this public to reuse it for problem 5
+        public AnyType element;
+        public BinaryNode<AnyType> left;
+        public BinaryNode<AnyType> right;
 
         BinaryNode(AnyType element) {
             this(element, null, null);
@@ -35,7 +35,7 @@ public class BinarySearchTree <AnyType extends Comparable<? super AnyType>> impl
         }
     }
 
-    BinaryNode<AnyType> root;
+    public BinaryNode<AnyType> root;
 
     private int theSize;
 
