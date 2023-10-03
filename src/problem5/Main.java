@@ -1,7 +1,5 @@
 package problem5;
 
-import problem4.BinarySearchTree;
-
 public class Main {
 
     public static void main(String[] args) {
@@ -20,7 +18,7 @@ public class Main {
         bt_nodes_switched.add(3);
         bt_nodes_switched.add(5);
         bt_nodes_switched.add(9);
-        bt_nodes_switched.switchNodes();
+        bt_nodes_switched.switchAllNodes();
 
         Helper<Integer> helper = new Helper<>();
         System.out.println(helper.checkIfTreesAreIsomorphic(bt_original, bt_nodes_switched));

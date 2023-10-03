@@ -1,6 +1,5 @@
 package problem5;
 
-import problem3.TreeNode;
 import problem4.BinarySearchTree;
 
 public class BinaryTree<AnyType extends Comparable<? super AnyType>> extends BinarySearchTree<AnyType> implements Iterable<AnyType> {
@@ -9,11 +8,13 @@ public class BinaryTree<AnyType extends Comparable<? super AnyType>> extends Bin
     public BinaryTree(){
     }
 
-    public void switchNodes() {
-        switchNodes(super.root);
+    public void switchAllNodes() {
+        switchAllNodes(super.root);
     }
 
-    private void switchNodes(BinaryNode<AnyType> node) {
+
+
+    private void switchAllNodes(BinaryNode<AnyType> node) {
         if (node == null) {
             return;
         }
@@ -22,8 +23,13 @@ public class BinaryTree<AnyType extends Comparable<? super AnyType>> extends Bin
             node.left = node.right;
             node.right = tempNode;
         }
-        switchNodes(node.left);
-        switchNodes(node.right);
+        switchAllNodes(node.left);
+        switchAllNodes(node.right);
+    }
+
+
+    private void switchChildrenOfAParent(AnyType parentVal) {
+
     }
 
 
