@@ -2,7 +2,7 @@ package problem6;
 
 import problem4.BinarySearchTree;
 
-public class AVLTree<AnyType extends Comparable<? super AnyType>> extends BinarySearchTree<AnyType> {
+public class AVLTree<AnyType extends Comparable<? super AnyType>> extends BinarySearchTree<AnyType> implements Iterable<AnyType> {
 
 
     public static class AVLNode<AnyType> {

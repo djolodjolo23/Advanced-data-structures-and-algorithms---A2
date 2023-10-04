@@ -1,5 +1,9 @@
 package problem6;
 
+import problem4.IteratorPREOrder;
+
+import java.util.Iterator;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -13,5 +17,10 @@ public class Main {
         avlTree.add(4);
         avlTree.add(1);
 
+        Iterator<Integer> it = new IteratorPREOrder<>(avlTree);
+
+        while (it.hasNext()) {
+            System.out.println(it.next());
+        }
     }
 }
