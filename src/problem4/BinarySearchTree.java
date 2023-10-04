@@ -28,7 +28,7 @@ public class BinarySearchTree <AnyType extends Comparable<? super AnyType>> impl
         BinaryNode(AnyType element) {
             this(element, null, null);
         }
-        BinaryNode(AnyType theElement, BinaryNode<AnyType> lt, BinaryNode<AnyType> rt){
+        public BinaryNode(AnyType theElement, BinaryNode<AnyType> lt, BinaryNode<AnyType> rt){
             element = theElement; left = lt; right = rt; height = 0;
         }
     }
@@ -150,14 +150,14 @@ public class BinarySearchTree <AnyType extends Comparable<? super AnyType>> impl
         return t;
     }
 
-    private int height(BinaryNode<AnyType> t) {
+    protected int height(BinaryNode<AnyType> t) {
         if (t == null) {
             return - 1;
         }
         return t.height;
     }
 
-    private BinaryNode<AnyType> findMin(BinaryNode<AnyType> t){
+    protected BinaryNode<AnyType> findMin(BinaryNode<AnyType> t){
         if (t == null) {
             return null;
         } else if (t.left == null) {

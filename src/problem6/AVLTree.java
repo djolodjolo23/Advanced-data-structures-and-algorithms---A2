@@ -4,34 +4,20 @@ import problem4.BinarySearchTree;
 
 public class AVLTree<AnyType extends Comparable<? super AnyType>> extends BinarySearchTree<AnyType> implements Iterable<AnyType> {
 
-    public static class AVLNode<AnyType> {
-        AnyType element;
-        AVLNode<AnyType> left;
-        AVLNode<AnyType> right;
-
-        int height;
-
-        AVLNode(AnyType element) {
-            this(element, null, null);
-        }
-        AVLNode(AnyType theElement, AVLNode<AnyType> lt, AVLNode<AnyType> rt){
-            element = theElement; left = lt; right = rt; height = 0;
-        }
-    }
 
     public AVLTree() {
         this.root = null;
     }
 
-    public AVLNode<AnyType> root;
+    public BinaryNode<AnyType> root;
     public void add(AnyType x) {
         root = add(x, root);
     }
 
-    private AVLNode<AnyType> add(AnyType x, AVLNode<AnyType> t) {
+    private BinaryNode<AnyType> add(AnyType x, BinaryNode<AnyType> t) {
         if (t == null) {
             theSize++;
-            return new AVLNode<>(x, null, null); // no more nodes to traverse
+            return new BinaryNode<>(x, null, null); // no more nodes to traverse
         }
         int compareResult = x.compareTo(t.element);
         if (compareResult < 0) {
@@ -39,10 +25,12 @@ public class AVLTree<AnyType extends Comparable<? super AnyType>> extends Binary
         } else if (compareResult > 0) {
             t.right = add(x, t.right);
         }
+
         return balance(t);
     }
 
-    public AVLNode<AnyType> remove(AnyType x, AVLNode<AnyType> t) {
+
+    public BinaryNode<AnyType> remove(AnyType x, BinaryNode<AnyType> t) {
         if (t == null) {
             return null; // item not found, do nothing
         }
@@ -52,7 +40,7 @@ public class AVLTree<AnyType extends Comparable<? super AnyType>> extends Binary
         } else if (compareResult > 0) {
             t.right = remove(x, t.right);
         } else if (t.left != null && t.right != null) {
-            t.element = findMin(t.right).element;
+            t.element = super.findMin(t.right).element;
             t.right = remove(t.element, t.right);
         } else {
             t = (t.left != null) ? t.left : t.right;
@@ -61,16 +49,8 @@ public class AVLTree<AnyType extends Comparable<? super AnyType>> extends Binary
         return balance(t);
     }
 
-    private AVLNode<AnyType> findMin(AVLNode<AnyType> t){
-        if (t == null) {
-            return null;
-        } else if (t.left == null) {
-            return t;
-        }
-        return findMin(t.left);
-    }
 
-    private AVLNode<AnyType> balance(AVLNode<AnyType> t) {
+    private BinaryNode<AnyType> balance(BinaryNode<AnyType> t) {
         if (t == null) {
             return null;
         }
@@ -93,15 +73,9 @@ public class AVLTree<AnyType extends Comparable<? super AnyType>> extends Binary
     }
 
 
-    private int height(AVLNode<AnyType> t) {
-        if (t == null) {
-            return - 1;
-        }
-        return t.height;
-    }
 
-    private AVLNode<AnyType> rotateLeft(AVLNode<AnyType> t2){
-        AVLNode<AnyType> t1 = t2.left;
+    private BinaryNode<AnyType> rotateLeft(BinaryNode<AnyType> t2){
+        BinaryNode<AnyType> t1 = t2.left;
         t2.left = t1.right;
         t1.right = t2;
         t2.height = Math.max(height(t2.left) , height(t2.right)) + 1;
@@ -109,8 +83,8 @@ public class AVLTree<AnyType extends Comparable<? super AnyType>> extends Binary
         return t1;
     }
 
-    private AVLNode<AnyType> rotateRight(AVLNode<AnyType> t2) {
-        AVLNode<AnyType> t1 = t2.right;
+    private BinaryNode<AnyType> rotateRight(BinaryNode<AnyType> t2) {
+        BinaryNode<AnyType> t1 = t2.right;
         t2.right = t1.left;
         t1.left = t2;
         t2.height = Math.max(height(t2.left), height(t2.right)) + 1;
@@ -118,12 +92,12 @@ public class AVLTree<AnyType extends Comparable<? super AnyType>> extends Binary
         return t1;
     }
 
-    private AVLNode<AnyType> doubleLeft (AVLNode<AnyType> t) {
+    private BinaryNode<AnyType> doubleLeft (BinaryNode<AnyType> t) {
         t.left = rotateRight(t.left);
         return rotateLeft(t);
     }
 
-    private AVLNode<AnyType> doubleRight (AVLNode<AnyType> t) {
+    private BinaryNode<AnyType> doubleRight (BinaryNode<AnyType> t) {
         t.right = rotateLeft(t.right);
         return rotateRight(t);
     }
