@@ -1,5 +1,6 @@
 package problem4;
 
+import problem6.AVLTree;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -12,11 +13,7 @@ import java.util.NoSuchElementException;
  */
 public class BinarySearchTree <AnyType extends Comparable<? super AnyType>> implements Iterable<AnyType>{
 
-    /**
-     * The iterator for the Binary search tree.
-     * @return can be any iterator, In, Post, Pre.
-     * TODO: Change the return object to iterator of your choice for testing.
-     */
+
     @Override
     public Iterator<AnyType> iterator() {
         return new IteratorINOrder<>(this);
@@ -26,18 +23,19 @@ public class BinarySearchTree <AnyType extends Comparable<? super AnyType>> impl
         public AnyType element;
         public BinaryNode<AnyType> left;
         public BinaryNode<AnyType> right;
+        public int height;
 
         BinaryNode(AnyType element) {
             this(element, null, null);
         }
         BinaryNode(AnyType theElement, BinaryNode<AnyType> lt, BinaryNode<AnyType> rt){
-            element = theElement; left = lt; right = rt;
+            element = theElement; left = lt; right = rt; height = 0;
         }
     }
 
     public BinaryNode<AnyType> root;
 
-    private int theSize;
+    public int theSize;
 
 
     public BinarySearchTree() {
@@ -89,6 +87,8 @@ public class BinarySearchTree <AnyType extends Comparable<? super AnyType>> impl
         }
     }
 
+
+
     public void removeKthLargestElement(int kth_largest_el) {
         if (kth_largest_el > theSize) {
             throw new NoSuchElementException("K value is larger of the tree size, please try with a smaller K value.");
@@ -104,6 +104,7 @@ public class BinarySearchTree <AnyType extends Comparable<? super AnyType>> impl
     }
 
 
+
     public int getTheHeight(AnyType x) {
         BinaryNode<AnyType> start = findNode(x);
         if (start.element == null) {
@@ -113,6 +114,8 @@ public class BinarySearchTree <AnyType extends Comparable<? super AnyType>> impl
         int rightHeight = (start.right == null) ? -1 : getTheHeight(start.right.element);
         return Math.max(leftHeight, rightHeight) + 1;
     }
+
+
 
     private boolean contains(AnyType x, BinaryNode<AnyType> t) {
         if (t == null) {
@@ -143,7 +146,15 @@ public class BinarySearchTree <AnyType extends Comparable<? super AnyType>> impl
         } else if (compareResult > 0) {
             t.right = add(x, t.right);
         }
+        t.height = Math.max(height(t.left), height(t.right) + 1);
         return t;
+    }
+
+    private int height(BinaryNode<AnyType> t) {
+        if (t == null) {
+            return - 1;
+        }
+        return t.height;
     }
 
     private BinaryNode<AnyType> findMin(BinaryNode<AnyType> t){
