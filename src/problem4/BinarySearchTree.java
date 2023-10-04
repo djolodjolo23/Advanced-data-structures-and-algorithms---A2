@@ -135,7 +135,7 @@ public class BinarySearchTree <AnyType extends Comparable<? super AnyType>> impl
     /*
     Internal method for inserting.
      */
-    private BinaryNode<AnyType> add(AnyType x, BinaryNode<AnyType> t) {
+    protected BinaryNode<AnyType> add(AnyType x, BinaryNode<AnyType> t) {
         if (t == null) {
             theSize++;
             return new BinaryNode<>(x, null, null); // no more nodes to traverse
@@ -175,7 +175,7 @@ public class BinarySearchTree <AnyType extends Comparable<? super AnyType>> impl
         return t;
     }
 
-    private BinaryNode<AnyType> remove(AnyType x, BinaryNode<AnyType> t) {
+    protected BinaryNode<AnyType> remove(AnyType x, BinaryNode<AnyType> t) {
         if (t == null) {
             return null; // item not found, do nothing
         }

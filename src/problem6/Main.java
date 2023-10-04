@@ -1,6 +1,7 @@
 package problem6;
 
 import problem4.BinarySearchTree;
+import problem4.IteratorINOrder;
 
 import javax.swing.text.Style;
 import java.util.Iterator;
@@ -23,6 +24,12 @@ public class Main {
         avlTree.add(7);
         avlTree.add(4);
         avlTree.add(1);
+
+        Iterator<Integer> it = new IteratorINOrder<>(avlTree);
+
+        while (it.hasNext()){
+            System.out.println(it.next());
+        }
 
 
         while (binarySearchTree.size() <= 10000 && avlTree.size() <= 10000) {

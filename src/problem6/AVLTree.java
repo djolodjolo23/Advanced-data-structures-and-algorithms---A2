@@ -6,48 +6,16 @@ public class AVLTree<AnyType extends Comparable<? super AnyType>> extends Binary
 
 
     public AVLTree() {
-        this.root = null;
     }
 
-    public BinaryNode<AnyType> root;
     public void add(AnyType x) {
-        root = add(x, root);
+        root = balance(super.add(x, root));
     }
 
-    private BinaryNode<AnyType> add(AnyType x, BinaryNode<AnyType> t) {
-        if (t == null) {
-            theSize++;
-            return new BinaryNode<>(x, null, null); // no more nodes to traverse
-        }
-        int compareResult = x.compareTo(t.element);
-        if (compareResult < 0) {
-            t.left = add(x, t.left);
-        } else if (compareResult > 0) {
-            t.right = add(x, t.right);
-        }
-
-        return balance(t);
+    public void remove(AnyType x) {
+        balance(super.remove(x, root));
     }
 
-
-    public BinaryNode<AnyType> remove(AnyType x, BinaryNode<AnyType> t) {
-        if (t == null) {
-            return null; // item not found, do nothing
-        }
-        int compareResult = x.compareTo(t.element);
-        if (compareResult < 0) {
-            t.left = remove(x, t.left);
-        } else if (compareResult > 0) {
-            t.right = remove(x, t.right);
-        } else if (t.left != null && t.right != null) {
-            t.element = super.findMin(t.right).element;
-            t.right = remove(t.element, t.right);
-        } else {
-            t = (t.left != null) ? t.left : t.right;
-            theSize--;
-        }
-        return balance(t);
-    }
 
 
     private BinaryNode<AnyType> balance(BinaryNode<AnyType> t) {
