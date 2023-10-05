@@ -6,33 +6,33 @@ public class Main {
 
         BinaryTree<Integer> bt_original = new BinaryTree<>();
         BinaryTree<Integer> bt_nodes_switched = new BinaryTree<>();
-        bt_original.add(8);
-        bt_original.add(4);
-        bt_original.add(10);
-        bt_original.add(3);
-        bt_original.add(5);
-        bt_original.add(9);
-        bt_nodes_switched.add(8);
-        bt_nodes_switched.add(4);
-        bt_nodes_switched.add(10);
-        bt_nodes_switched.add(3);
-        bt_nodes_switched.add(5);
-        bt_nodes_switched.add(9);
-        bt_nodes_switched.swapAllPairsOfChildren();
 
-        bt_nodes_switched.swapChildrenOfASpecificNode(8);
-        bt_nodes_switched.swapChildToLeftOrRight(10);
-        bt_nodes_switched.swapChildToLeftOrRight(9);
-        bt_nodes_switched.swapChildToLeftOrRight(5);
-        Helper<Integer> helper = new Helper<>();
-        System.out.println(helper.checkIfTreesAreIsomorphic(bt_original, bt_nodes_switched));
-        for (Integer i : bt_original) {
+        IsomorphicTester<Integer> isomorphicTester = new IsomorphicTester<>();
+
+
+
+        for (int i = 0; i < 3000; i++) {
+            bt_original.add(i);
+            bt_nodes_switched.add(i);
+        }
+
+        //bt_nodes_switched.swapAllPairsOfChildren();
+
+        System.out.println(isomorphicTester.testIfTreesAreIsomorphic(bt_original, bt_nodes_switched));
+        bt_nodes_switched.swapChildToLeftOrRight(6);
+
+        bt_original.swapChildToLeftOrRight(6);
+        System.out.println(isomorphicTester.testIfTreesAreIsomorphic(bt_original, bt_nodes_switched));
+
+        for (Integer i : bt_original) { //currently set to INOrder withing BST class
             System.out.println(i);
         }
-        System.out.println();
-        for (Integer i : bt_nodes_switched) {
+
+        for (Integer i : bt_nodes_switched) { //currently set to INOrder withing BST class
             System.out.println(i);
         }
+
+        //Iterator<Integer> itPost = new IteratorPOSTOrder<>()
 
     }
 }
