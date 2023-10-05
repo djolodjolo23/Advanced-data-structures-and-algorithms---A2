@@ -7,10 +7,13 @@ public class Main {
         BinaryTree<Integer> bt_original = new BinaryTree<>();
         BinaryTree<Integer> bt_nodes_switched = new BinaryTree<>();
 
+
+
+
         IsomorphicTester<Integer> isomorphicTester = new IsomorphicTester<>();
 
 
-
+        System.out.println(isomorphicTester.testIfTreesAreIsomorphic(bt_original, bt_nodes_switched));
         for (int i = 0; i < 3000; i++) {
             bt_original.add(i);
             bt_nodes_switched.add(i);
