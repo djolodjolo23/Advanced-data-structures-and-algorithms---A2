@@ -39,19 +39,14 @@ public class IsomorphicTester<AnyType extends Comparable<? super AnyType>> {
         } else {
             return false;
         }
-        return nodesExistOnOneButNotOnOther(bt1, bt2); // if a node exist on one and not on other tree, not isomorphic
+        return nodesExistOnOneButNotOnOther(bt1, bt2);
     }
 
     private boolean nodesExistOnOneButNotOnOther(BinaryTree.BinaryNode<AnyType> bt1, BinaryTree.BinaryNode<AnyType> bt2) {
-        boolean left1Null = bt1.left == null;
-        boolean left2NotNull = bt2.left != null;
-        boolean right1Null = bt1.right == null;
-        boolean right2NotNull = bt2.right != null;
-
-        return (left1Null || left2NotNull || right2NotNull)
-                && (right1Null || left2NotNull || right2NotNull)
-                && (left2NotNull || left1Null || right1Null)
-                && (right2NotNull || left1Null || right1Null);
+        return (bt1.left == null || bt2.left != null || bt2.right != null)
+                && (bt1.right == null || bt2.left != null || bt2.right != null)
+                && (bt2.left == null || bt1.left != null || bt1.right != null)
+                && (bt2.right == null || bt1.left != null || bt1.right != null); // if a node exist on one and not on other tree
     }
 
 
@@ -81,5 +76,6 @@ public class IsomorphicTester<AnyType extends Comparable<? super AnyType>> {
         }
         return count;
     }
+
 
 }

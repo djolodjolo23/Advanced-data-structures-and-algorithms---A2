@@ -1,5 +1,11 @@
 package problem5;
 
+import helpers.PrintStuff;
+import problem4.IteratorPREOrder;
+import problem6.AVLTree;
+
+import java.util.Iterator;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -7,35 +13,50 @@ public class Main {
         BinaryTree<Integer> bt_original = new BinaryTree<>();
         BinaryTree<Integer> bt_nodes_switched = new BinaryTree<>();
 
+        int[] nums = {20, 10, 30, 25, 35, 8, 15, 4, 9};
 
+        for (int num : nums) {
+            bt_original.add(num);
+            bt_nodes_switched.add(num);
+        }
 
 
         IsomorphicTester<Integer> isomorphicTester = new IsomorphicTester<>();
+        PrintStuff<Integer> printStuff = new PrintStuff<>();
+        Iterator<Integer> bt_original_it = new IteratorPREOrder<>(bt_original);
+        Iterator<Integer> bt_nodes_switched_it = new IteratorPREOrder<>(bt_nodes_switched);
 
-
+        /*
         System.out.println(isomorphicTester.testIfTreesAreIsomorphic(bt_original, bt_nodes_switched));
         for (int i = 0; i < 3000; i++) {
             bt_original.add(i);
             bt_nodes_switched.add(i);
         }
+         */
 
-        //bt_nodes_switched.swapAllPairsOfChildren();
+        bt_nodes_switched.swapAllPairsOfChildren();
 
-        System.out.println(isomorphicTester.testIfTreesAreIsomorphic(bt_original, bt_nodes_switched));
-        bt_nodes_switched.swapChildToLeftOrRight(6);
 
-        bt_original.swapChildToLeftOrRight(6);
-        System.out.println(isomorphicTester.testIfTreesAreIsomorphic(bt_original, bt_nodes_switched));
 
-        for (Integer i : bt_original) { //currently set to INOrder withing BST class
-            System.out.println(i);
-        }
+        printStuff.printIteratorValues(bt_original_it);
+        printStuff.printIteratorValues(bt_nodes_switched_it);
+        printStuff.printIsomorphic(isomorphicTester.testIfTreesAreIsomorphic(bt_original, bt_nodes_switched));
 
-        for (Integer i : bt_nodes_switched) { //currently set to INOrder withing BST class
-            System.out.println(i);
-        }
+        bt_original_it = new IteratorPREOrder<>(bt_original);
+        bt_nodes_switched_it = new IteratorPREOrder<>(bt_nodes_switched);
+        bt_nodes_switched.swapChildrenOfASpecificNode(30);
 
-        //Iterator<Integer> itPost = new IteratorPOSTOrder<>()
+        printStuff.printIteratorValues(bt_original_it);
+        printStuff.printIteratorValues(bt_nodes_switched_it);
+        printStuff.printIsomorphic(isomorphicTester.testIfTreesAreIsomorphic(bt_original, bt_nodes_switched));
+
+        bt_original_it = new IteratorPREOrder<>(bt_original);
+        bt_nodes_switched_it = new IteratorPREOrder<>(bt_nodes_switched);
+        bt_nodes_switched.add(5);
+
+        printStuff.printIteratorValues(bt_original_it);
+        printStuff.printIteratorValues(bt_nodes_switched_it);
+        printStuff.printIsomorphic(isomorphicTester.testIfTreesAreIsomorphic(bt_original, bt_nodes_switched));
 
     }
 }
