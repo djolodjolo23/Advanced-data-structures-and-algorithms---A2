@@ -1,119 +1,90 @@
 package problem3;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
-public class Tree {
+public class Tree implements Iterable<TreeNode> {
 
-    private List<TreeNode> nodes;
+    private TreeNode lastNode;
+
+    private TreeNode rootNode;
+
+    private int theSize;
+
+    private Iterator<TreeNode> myIterator;
+
 
     public Tree(String rootPath) {
-        nodes = new ArrayList<>();
+        theSize = 0;
         this.buildTree(rootPath);
+        myIterator = iterator();
     }
+
+    /**
+     * The iterator for the Binary search tree.
+     * @return can be Post, Pre.
+     * TODO: Change the return object to iterator of your choice for testing.
+     */
+    @Override
+    public Iterator<TreeNode> iterator() {
+        return new IteratorPOSTOrder(rootNode);
+    }
+
 
     public void buildTree(String inputPath) {
         File parentDir = new File(String.valueOf(inputPath));
         File[] elements = parentDir.listFiles();
-        if (nodes.isEmpty()) {
+        if (theSize == 0) {
             TreeNode rootNode = new TreeNode(parentDir.getName(), parentDir.getAbsolutePath());
+            lastNode = rootNode;
+            this.rootNode = rootNode;
             directoryCheck(parentDir, rootNode);
-            nodes.add(rootNode);
+            theSize += 1;
         }
         if (elements == null) {
             System.err.println("Failed to list files in "+ parentDir.getName());
             return;
         }
-        TreeNode currentNode = nodes.get(nodes.size()-1);
+        TreeNode firstNode = null;
         if (elements.length != 0) {
-            currentNode.setFirstChild(elements[0].getName());
+            firstNode = new TreeNode(elements[0].getName(), elements[0].getAbsolutePath());
+            lastNode.setFirstChild(firstNode);
         }
         for (int i = 0; i < elements.length; i++) {
-            File first = elements[i];
-            TreeNode treeNode1 = new TreeNode(first.getName(), first.getAbsolutePath());
-            directoryCheck(first, treeNode1);
-            nodes.add(treeNode1);
+            File firstFile = elements[i];
+            lastNode = firstNode;
+            directoryCheck(firstFile, firstNode);
+            if (firstFile.isDirectory()) {
+                buildTree(firstFile.getPath());
+            }
             if (i != elements.length - 1) {
-                File second = elements[i + 1];
-                treeNode1.setRightSibling(second.getName());
+                File secondFile = elements[i + 1];
+                TreeNode secondNode = new TreeNode(secondFile.getName(), secondFile.getAbsolutePath());
+                firstNode.setRightSibling(secondNode);
+                firstNode = secondNode;
             }
-            if (first.isDirectory()) {
-                buildTree(first.getPath());
-            }
         }
     }
-
-    public void printTree() {
-        if (nodes.isEmpty()) {
-            System.out.println("The tree is empty");
-        } else {
-           TreeNode root = nodes.get(0);
-           printNode(root, 0);
-        }
-    }
-
-    private void printNode(TreeNode node, int depth) {
-        System.out.println(" ".repeat(Math.max(0, depth)) + node.getName());
-        TreeNode child = getNodeByName(node.getFirstChild());
-        while (child != null) {
-            printNode(child, depth);
-            child = getNodeByName(child.getRightSibling());
-        }
-    }
-
-
 
     public void directoryCheck(File file, TreeNode treeNode) {
         treeNode.setDirectory(file.isDirectory());
     }
 
-    public void walkThroughTree() {
-        for (TreeNode tn : nodes) {
-            System.out.println(tn.getName());
-        }
-    }
-
-    private void updateTree(TreeNode pointerNode, TreeNode nextNode) {
-        int pointerIndex = nodes.indexOf(pointerNode);
-        nodes.add(pointerIndex + 1, nextNode);
-    }
-
-    public TreeNode getNodeByName(String name) {
-        TreeNode treeNode = null;
-        for (TreeNode tn : nodes) {
-            if (Objects.equals(tn.getName(), name)) {
-                treeNode = tn;
-            }
-        }
-        return treeNode;
-    }
-
-
-    public void walkThroughFolders() {
-        for (TreeNode tn : nodes) {
-            if (tn.isDirectory()) {
-                System.out.println(tn.getName());
-            }
-        }
-    }
 
     public String getAbsolutePathOfANode(String nodeName) {
-        String wantedNode = null;
-        for (TreeNode node : nodes) {
-            if (node.getAbsolutePath().endsWith(nodeName)) {
-                wantedNode = node.getAbsolutePath();
+        String absPath = null;
+        while (myIterator.hasNext()) {
+            TreeNode treeNode = myIterator.next();
+            if (treeNode.getName().equals(nodeName)) {
+               absPath = treeNode.getAbsolutePath();
+               break;
             }
         }
-        return wantedNode;
+        return absPath;
     }
 
 
-    public void addChild() {
-        Scanner scanner = new Scanner(System.in);
-        walkThroughFolders();
+    public void addChild(Scanner scanner) {
         System.out.println("Provide the file to add a child, choose one from the top list: ");
         String folderName = scanner.nextLine();
         File parentDir = new File(getAbsolutePathOfANode(folderName));
@@ -136,13 +107,25 @@ public class Tree {
         TreeNode newNode = new TreeNode(fileName, newFile.getAbsolutePath());
         assert elements != null;
         if (elements.length == 0) {
-            TreeNode parentNode = getNodeByName(folderName);
-            parentNode.setFirstChild(newNode.getName());
-            updateTree(parentNode, newNode);
+            TreeNode parentNode = findTreeNode(folderName);
+            parentNode.setFirstChild(newNode);
         } else {
-            TreeNode childNode = getNodeByName(elements[elements.length - 1].getName());
-            childNode.setRightSibling(newNode.getName());
-            updateTree(childNode, newNode);
+            TreeNode childNode = findTreeNode(elements[elements.length - 1].getName());
+            childNode.setRightSibling(newNode);
         }
     }
+
+    public TreeNode findTreeNode(String name) {
+        TreeNode treeNode = null;
+        while (myIterator.hasNext()) {
+            treeNode = myIterator.next();
+            if (Objects.equals(treeNode.getName(), name)) {
+                break;
+            }
+        }
+        return treeNode;
+    }
+
+
+
 }

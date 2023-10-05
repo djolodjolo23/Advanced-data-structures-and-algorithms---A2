@@ -2,22 +2,20 @@ package problem3;
 
 public class TreeNode {
 
-    private String name;
-    private String firstChild;
-    private String rightSibling;
-    private boolean directory;
+    public String name;
+    public TreeNode firstChild;
+    public TreeNode rightSibling;
+    public boolean directory;
 
-    private String absolutePath;
+    public String absolutePath;
 
     public TreeNode(String name, String absolutePath){
         this.name = name;
-        this.firstChild = null;
-        this.rightSibling = null;
         this.absolutePath = absolutePath;
     }
 
 
-    public void setFirstChild(String firstChild) {
+    public void setFirstChild(TreeNode firstChild) {
         this.firstChild = firstChild;
     }
 
@@ -38,25 +36,8 @@ public class TreeNode {
         return directory;
     }
 
-    public String getFirstChild() {
-        return firstChild;
-    }
-
-    public String getRightSibling() {
-        return rightSibling;
-    }
-
-    public void setRightSibling(String rightSibling) {
+    public void setRightSibling(TreeNode rightSibling) {
         this.rightSibling = rightSibling;
     }
 
-    @Override
-    public String toString() {
-        return "TreeNode{" +
-                "name='" + name + '\'' +
-                ", firstChild='" + firstChild + '\'' +
-                ", rightSibling='" + rightSibling + '\'' +
-                ", absolutePath='" + absolutePath + '\'' +
-                '}';
-    }
 }
