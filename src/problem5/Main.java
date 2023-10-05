@@ -18,8 +18,12 @@ public class Main {
         bt_nodes_switched.add(3);
         bt_nodes_switched.add(5);
         bt_nodes_switched.add(9);
-        bt_nodes_switched.switchAllNodes();
+        bt_nodes_switched.swapAllPairsOfChildren();
 
+        bt_nodes_switched.swapChildrenOfASpecificNode(8);
+        bt_nodes_switched.swapChildToLeftOrRight(10);
+        bt_nodes_switched.swapChildToLeftOrRight(9);
+        bt_nodes_switched.swapChildToLeftOrRight(5);
         Helper<Integer> helper = new Helper<>();
         System.out.println(helper.checkIfTreesAreIsomorphic(bt_original, bt_nodes_switched));
         for (Integer i : bt_original) {

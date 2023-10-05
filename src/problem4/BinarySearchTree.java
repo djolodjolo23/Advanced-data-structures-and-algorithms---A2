@@ -68,6 +68,9 @@ public class BinarySearchTree <AnyType extends Comparable<? super AnyType>> impl
     }
 
 
+    /**
+     * The method can also be implemented with Iterator instead of recursion, but this gives a better time complexity.
+     */
     private BinaryNode<AnyType> findNode(AnyType x) {
         return findNode(x, root);
     }
