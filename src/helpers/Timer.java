@@ -1,5 +1,7 @@
 package helpers;
 
+import java.util.List;
+
 public class Timer{
   private long startTime;
   private long endTime;
@@ -38,7 +40,7 @@ public class Timer{
     }
   }
 
-  private long findAverageRunningTime(long[] times) {
+  private long findAverageRunningTime(List<Long> times) {
     long avg = 0;
     int avg_counter = 0;
     for (long t : times) {

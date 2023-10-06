@@ -4,8 +4,7 @@ import problem4.BinarySearchTree;
 import problem4.IteratorINOrder;
 
 import javax.swing.text.Style;
-import java.util.Iterator;
-import java.util.Random;
+import java.util.*;
 
 public class Main {
 
@@ -18,6 +17,7 @@ public class Main {
 
         Random random = new Random();
 
+        helpers.Timer timer = new helpers.Timer();
 
         avlTree.add(3);
         avlTree.add(5);
@@ -31,17 +31,21 @@ public class Main {
             System.out.println(it.next());
         }
 
+        List<Long> bst_insert_times = new ArrayList<>();
+        List<Long> avl_insert_times = new ArrayList<>();
 
-        while (binarySearchTree.size() <= 10000 && avlTree.size() <= 10000) {
-            int insert = random.nextInt(1, 100000);
-            if (binarySearchTree.size() <= 10000) {
-                binarySearchTree.add(insert);
-            }
-            if (avlTree.size() <= 10000) {
-                avlTree.add(insert);
-            }
+
+
+        for (int i = 0; i < 100000; i++) {
+            int insert = random.nextInt(1, 5000000);
+            bst_insert_times.add(timer.timeItNanoTime(() -> binarySearchTree.add(insert)));
+            avl_insert_times.add(timer.timeItNanoTime(() -> avlTree.add(insert)));
         }
-        System.out.println();
+
+
+
+
+
 
 
     }

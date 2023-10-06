@@ -7,7 +7,7 @@ import java.util.List;
 public class CSVExporter {
 
 
-  public void exportLongTimesToCSV(long[] dataList, String fileName) {
+  public void exportLongTimesToCSV(List<Long> dataList, String fileName) {
     try (FileWriter csvWriter = new FileWriter(fileName)) {
       for (Long data : dataList) {
         csvWriter.append(data.toString());
