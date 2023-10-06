@@ -4,12 +4,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-public class CSVExporter {
+public class CSVExporter<AnyType> {
 
 
-  public void exportLongTimesToCSV(List<Long> dataList, String fileName) {
+  public void exportTimesToCSV(List<AnyType> dataList, String fileName) {
     try (FileWriter csvWriter = new FileWriter(fileName)) {
-      for (Long data : dataList) {
+      for (AnyType data : dataList) {
         csvWriter.append(data.toString());
         csvWriter.append("\n");
       }

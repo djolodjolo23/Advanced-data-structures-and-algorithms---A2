@@ -32,22 +32,6 @@ public class BinaryTree<AnyType extends Comparable<? super AnyType>> extends Bin
         swapAllPairsOfChildren(node.right);
     }
 
-    /**
-     * Using iterator to find the input node.
-     * @param x is the input.
-     * @return is the binary node, or null.
-     */
-    private BinaryNode<AnyType> findNodeWithIterator(AnyType x) {
-        NodeIteratorINOrder<AnyType> it = new NodeIteratorINOrder<>(this);
-        BinaryNode<AnyType> element = null;
-        while (it.hasNext()) {
-            element = it.next();
-            if (element.element == x) {
-                break;
-            }
-        }
-        return element;
-    }
 
 
     /**

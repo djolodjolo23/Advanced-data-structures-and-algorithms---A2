@@ -41,7 +41,7 @@ public class Timer{
     }
   }
 
-  public List<Long> findAverageRunningTime(List<List<Long>> listOfValues) {
+  public List<Long> findAverageRunningTimeLong(List<List<Long>> listOfValues) {
     int totalLists = listOfValues.size();
     int totalEntries = listOfValues.get(0).size();
 
@@ -56,6 +56,42 @@ public class Timer{
     }
     return averages;
   }
+
+  public List<Integer> findAverageIntegers(List<List<Integer>> listOfValues) {
+    int totalLists = listOfValues.size();
+    int totalEntries = listOfValues.get(0).size();
+
+    List<Integer> averages = new ArrayList<>();
+
+    for (int i = 0; i < totalEntries; i++) {
+      long sum = 0;
+      for (List<Integer> list : listOfValues) {
+        sum += list.get(i);
+      }
+      double average = (double) sum / totalLists; // Use double division here
+      averages.add((int) Math.round(average)); // Round to the nearest integer
+    }
+    return averages;
+  }
+
+  public double findAverageInt(List<Integer> list) {
+    double sum = 0.0;
+    for (Integer val : list) {
+      sum += val;
+    }
+    return sum/list.size();
+  }
+
+  public double findAverageLong(List<Long> list) {
+    double sum = 0.0;
+    for (Long val : list) {
+      sum += val;
+    }
+    return sum/list.size();
+  }
+
+
+
 
 
   @Override

@@ -1,5 +1,6 @@
 package problem4;
 
+import helpers.NodeIteratorINOrder;
 import problem6.AVLTree;
 
 import java.util.Iterator;
@@ -43,6 +44,15 @@ public class BinarySearchTree <AnyType extends Comparable<? super AnyType>> impl
         theSize = 0;
     }
 
+    public void resetTree(BinarySearchTree<AnyType> tree) {
+        tree.root = null;
+        tree.theSize = 0;
+    }
+
+    public BinaryNode<AnyType> getRoot() {
+        return root;
+    }
+
     public void add(AnyType x) {
         root = add(x, root);
     }
@@ -71,7 +81,7 @@ public class BinarySearchTree <AnyType extends Comparable<? super AnyType>> impl
     /**
      * The method can also be implemented with Iterator instead of recursion, but this gives a better time complexity.
      */
-    private BinaryNode<AnyType> findNode(AnyType x) {
+    public BinaryNode<AnyType> findNode(AnyType x) {
         return findNode(x, root);
     }
 
@@ -88,6 +98,37 @@ public class BinarySearchTree <AnyType extends Comparable<? super AnyType>> impl
         } else {
             return t;
         }
+    }
+
+    /**
+     * Using iterator to find the input node.
+     * @param x is the input.
+     * @return is the binary node, or null.
+     */
+    public BinaryNode<AnyType> findNodeWithIterator(AnyType x) {
+        NodeIteratorINOrder<AnyType> it = new NodeIteratorINOrder<>(this);
+        BinaryNode<AnyType> element = null;
+        while (it.hasNext()) {
+            element = it.next();
+            if (element.element == x) {
+                break;
+            }
+        }
+        return element;
+    }
+
+    public BinaryNode<AnyType> findNodeWithIndex(int index) {
+        NodeIteratorINOrder<AnyType> it = new NodeIteratorINOrder<>(this);
+        BinaryNode<AnyType> element = null;
+        int count = 0;
+        while (it.hasNext()) {
+            element = it.next();
+            if (count == index) {
+                break;
+            }
+            count++;
+        }
+        return element;
     }
 
 
