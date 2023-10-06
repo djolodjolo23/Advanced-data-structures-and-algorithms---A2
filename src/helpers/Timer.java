@@ -1,5 +1,6 @@
 package helpers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Timer{
@@ -40,14 +41,20 @@ public class Timer{
     }
   }
 
-  private long findAverageRunningTime(List<Long> times) {
-    long avg = 0;
-    int avg_counter = 0;
-    for (long t : times) {
-      avg += t;
-      avg_counter += 1;
+  public List<Long> findAverageRunningTime(List<List<Long>> listOfValues) {
+    int totalLists = listOfValues.size();
+    int totalEntries = listOfValues.get(0).size();
+
+    List<Long> averages = new ArrayList<>();
+
+    for (int i = 0; i < totalEntries; i++) {
+      long sum = 0;
+      for (List<Long> list : listOfValues) {
+        sum += list.get(i);
+      }
+      averages.add(sum / totalLists);
     }
-    return avg / avg_counter;
+    return averages;
   }
 
 

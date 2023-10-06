@@ -1,5 +1,6 @@
 package problem6;
 
+import helpers.CSVExporter;
 import problem4.BinarySearchTree;
 import problem4.IteratorINOrder;
 
@@ -19,6 +20,8 @@ public class Main {
 
         helpers.Timer timer = new helpers.Timer();
 
+        CSVExporter csvExporter = new CSVExporter();
+
         avlTree.add(3);
         avlTree.add(5);
         avlTree.add(7);
@@ -31,16 +34,40 @@ public class Main {
             System.out.println(it.next());
         }
 
-        List<Long> bst_insert_times = new ArrayList<>();
-        List<Long> avl_insert_times = new ArrayList<>();
+        List<List<Long>> bst_insert_times_all = new ArrayList<>();
+        List<List<Long>> avl_insert_times_all = new ArrayList<>();
 
 
-
-        for (int i = 0; i < 100000; i++) {
-            int insert = random.nextInt(1, 5000000);
-            bst_insert_times.add(timer.timeItNanoTime(() -> binarySearchTree.add(insert)));
-            avl_insert_times.add(timer.timeItNanoTime(() -> avlTree.add(insert)));
+        for (int j = 0; j < 20; j++) {
+            List<Long> bst_insert_times = new ArrayList<>();
+            List<Long> avl_insert_times = new ArrayList<>();
+            for (int i = 0; i < 1000000; i++) {
+                int insert = random.nextInt(1, 5000000);
+                binarySearchTree.add(insert);
+                avlTree.add(insert);
+                if (i % 10000 == 0) {
+                    bst_insert_times.add(timer.timeItNanoTime(() -> binarySearchTree.add(insert)));
+                    avl_insert_times.add(timer.timeItNanoTime(() -> avlTree.add(insert)));
+                } else {
+                    binarySearchTree.add(insert);
+                    avlTree.add(insert);
+                }
+            }
+            bst_insert_times_all.add(bst_insert_times);
+            avl_insert_times_all.add(avl_insert_times);
         }
+
+
+        List<Long> bst_insert_times_avg = timer.findAverageRunningTime(bst_insert_times_all);
+        List<Long> avl_insert_times_avg = timer.findAverageRunningTime(avl_insert_times_all);
+
+        csvExporter.exportLongTimesToCSV(bst_insert_times_avg, "bst_insert_times_avg");
+        csvExporter.exportLongTimesToCSV(avl_insert_times_avg, "avl_insert_times_avg");
+
+
+        System.out.println(binarySearchTree.getTheHeight());
+
+
 
 
 
