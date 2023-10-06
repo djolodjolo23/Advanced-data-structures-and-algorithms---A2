@@ -26,7 +26,7 @@ public class Main {
 
         HuffmanTree huffmanTree = new HuffmanTree();
 
-        huffmanTree.buildTree(sortedFrequencies);
+        huffmanTree.buildTree(letterFrequencySorted);
 
 
     }
