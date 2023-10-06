@@ -1,1 +1,1 @@
-BCCABBDDAECCBBAEDDCC
+This is a testing demo file that should be used in huffman tree implementation.
