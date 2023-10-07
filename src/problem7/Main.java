@@ -25,7 +25,7 @@ public class Main {
 
         System.out.println("iterator:");
         for (HuffmanTree.HuffmanNode n : huffmanTree) {
-            System.out.print(n.code + " ");
+            System.out.print(n.code + "-" + n.character + " ");
         }
 
         System.out.println();

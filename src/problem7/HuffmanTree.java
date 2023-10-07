@@ -44,26 +44,62 @@ public class HuffmanTree implements Iterable<HuffmanTree.HuffmanNode> {
         for (Map.Entry<Character, Integer> frequency : frequencies) {
             huffmanNodes.add(new HuffmanNode(frequency.getKey(), frequency.getValue()));
         }
+        HuffmanNode remainderNode1 = null;
+        HuffmanNode remainderNode2;
+        HuffmanNode parentRemainder = null;
         while (huffmanNodes.size() > 1) {
-            if (huffmanNodes.size() % 2 == 1 || huffmanNodes.size() == 2) {
+            if (huffmanNodes.size() % 3 == 2 && huffmanNodes.size() % 2 != 0) {
+                remainderNode1 = huffmanNodes.remove(huffmanNodes.size() - 2);
+                remainderNode2 = huffmanNodes.remove(huffmanNodes.size() - 1);
+                parentRemainder = new HuffmanNode(remainderNode1.frequency + remainderNode2.frequency);
+                parentRemainder.left = remainderNode1;
+                parentRemainder.right = remainderNode2;
+            }
+            else if (huffmanNodes.size() % 3 == 1 && huffmanNodes.size() % 2 != 0) {
+                remainderNode1 = huffmanNodes.remove(huffmanNodes.size() - 1);
+            }
+            huffmanNodes = buildRow(huffmanNodes);
+            if (parentRemainder != null) {
+                huffmanNodes.add(parentRemainder);
+                parentRemainder = null;
+                remainderNode1 = null;
+            } else if (remainderNode1 != null) {
+                huffmanNodes.add(remainderNode1);
+                remainderNode1 = null;
+            }
+        }
+        this.root = huffmanNodes.remove(0);
+        buildCodes(root);
+    }
+
+    private List<HuffmanNode> buildRow(List<HuffmanNode> huffmanNodes) {
+        List<HuffmanNode> parents = new ArrayList<>();
+        if (huffmanNodes.size() % 2 == 0) {
+            while (!huffmanNodes.isEmpty()) {
                 HuffmanNode left = huffmanNodes.remove(0);
                 HuffmanNode right = huffmanNodes.remove(0);
                 HuffmanNode parent = new HuffmanNode(left.frequency + right.frequency);
                 parent.left = left;
                 parent.right = right;
-                huffmanNodes.add(parent);
-            } else {
+                parents.add(parent);
+            }
+        } else {
+            while (!huffmanNodes.isEmpty()) {
+                HuffmanNode left = huffmanNodes.remove(0);
                 HuffmanNode right = huffmanNodes.remove(0);
-                HuffmanNode left = huffmanNodes.remove(huffmanNodes.size() - 1);
+                HuffmanNode rightRight = huffmanNodes.remove(0);
                 HuffmanNode parent = new HuffmanNode(left.frequency + right.frequency);
                 parent.left = left;
                 parent.right = right;
-                huffmanNodes.add(parent);
+                HuffmanNode parentParent = new HuffmanNode(parent.frequency + rightRight.frequency);
+                parentParent.left = parent;
+                parentParent.right = rightRight;
+                parents.add(parentParent);
             }
         }
-        this.root = huffmanNodes.get(0);
-        buildCodes(root);
+        return parents;
     }
+
 
     public String getCode(char letter) {
         Iterator<HuffmanNode> it = new MyIterator(this);
@@ -101,4 +137,5 @@ public class HuffmanTree implements Iterable<HuffmanTree.HuffmanNode> {
             codeBuilder.deleteCharAt(codeBuilder.length() - 1);
         }
     }
+
 }
