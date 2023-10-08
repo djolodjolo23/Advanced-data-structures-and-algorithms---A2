@@ -85,11 +85,11 @@ public class Tree implements Iterable<TreeNode> {
 
 
     public void addChild(Scanner scanner) {
-        System.out.println("Provide the file to add a child, choose one from the top list: ");
+        System.out.println("Provide the file to add a child, choose one from the top list. Choose the file without the extension: ");
         String folderName = scanner.nextLine();
         File parentDir = new File(getAbsolutePathOfANode(folderName));
         if (!parentDir.exists() || !parentDir.isDirectory()) {
-            System.out.println("The specified folder does not exist.");
+            throw new NoSuchElementException("The specified file is not a folder.");
         }
         File[] elements = parentDir.listFiles();
         System.out.println("Provide the file name: ");

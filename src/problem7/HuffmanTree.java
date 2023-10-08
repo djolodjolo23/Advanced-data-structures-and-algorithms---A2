@@ -39,6 +39,13 @@ public class HuffmanTree implements Iterable<HuffmanTree.HuffmanNode> {
     private StringBuilder codeBuilder;
 
 
+    /**
+     * Building tree from the bottom.
+     * The nodes build parents either in pair or in tree.
+     * If in tree, the first two make parent, and then third is merged to a parent of first two.
+     * Therefore, in case currentNodes % 2 != 0 and currentNodes % 3 != 0, remainder nodes two or one are left for the next iteration.
+     * @param frequencies are characters and their frequencies.
+     */
     public void buildTree(List<Map.Entry<Character, Integer>> frequencies) {
         List<HuffmanNode> huffmanNodes = new ArrayList<>();
         for (Map.Entry<Character, Integer> frequency : frequencies) {
@@ -48,14 +55,14 @@ public class HuffmanTree implements Iterable<HuffmanTree.HuffmanNode> {
         HuffmanNode remainderNode2;
         HuffmanNode parentRemainder = null;
         while (huffmanNodes.size() > 1) {
-            if (huffmanNodes.size() % 3 == 2 && huffmanNodes.size() % 2 != 0) {
+            if (huffmanNodes.size() % 3 == 2 && huffmanNodes.size() % 2 != 0) { // leftover with 2
                 remainderNode1 = huffmanNodes.remove(huffmanNodes.size() - 2);
                 remainderNode2 = huffmanNodes.remove(huffmanNodes.size() - 1);
                 parentRemainder = new HuffmanNode(remainderNode1.frequency + remainderNode2.frequency);
                 parentRemainder.left = remainderNode1;
                 parentRemainder.right = remainderNode2;
             }
-            else if (huffmanNodes.size() % 3 == 1 && huffmanNodes.size() % 2 != 0) {
+            else if (huffmanNodes.size() % 3 == 1 && huffmanNodes.size() % 2 != 0) { // leftover with one
                 remainderNode1 = huffmanNodes.remove(huffmanNodes.size() - 1);
             }
             huffmanNodes = buildRow(huffmanNodes);
@@ -72,6 +79,12 @@ public class HuffmanTree implements Iterable<HuffmanTree.HuffmanNode> {
         buildCodes(root);
     }
 
+
+    /**
+     * Inner method for building rows.
+     * @param huffmanNodes are the current nodes.
+     * @return new list with parent nodes, from the merged huffman nodes.
+     */
     private List<HuffmanNode> buildRow(List<HuffmanNode> huffmanNodes) {
         List<HuffmanNode> parents = new ArrayList<>();
         if (huffmanNodes.size() % 2 == 0) {
@@ -125,7 +138,6 @@ public class HuffmanTree implements Iterable<HuffmanTree.HuffmanNode> {
             return;
         }
         if (root.left != null) {
-            // check if code null
             codeBuilder.append(0);
             buildCodes(root.left);
         }

@@ -1,0 +1,23 @@
+- The src package contains sub-packages for each problem. In each sub-package there is a main class with a main method inside, where the code can be compiled and executed.
+- Helpers package contains several helper classes for exporting the data, printing, timing.
+
+
+- Problem 1
+  - The Deque object is created inside the Main class where nodes can be added first or last. Also with the for loop, iterator is accesing elements one by one and they are printed in the console.
+- Problem 2
+  - Similarly to problem 1, the Deque object can be tested in a Main class with different operations. 
+- Problem 3
+  - Main method contains tree object that builds tree with the input provided as a parameter. There are also methods to find the specific node and add node.
+- Problem 4
+  - Main method contains BST object that can be tested with implemented methods. Iterator can be called either from the BST class or it can be directly created inside the main method within Main class. Note that in BST, iterator objects need to be changed, currently it's set to INOrder.
+- Problem 5
+  - In this task, I created a BinaryTree that is a subclass of a Binary search tree, with additional methods to swap nodes when the tree is created. This seemed like a convinient solution for testing because I can create two trees that are exactly the same and then test the isomorphism when swapping nodes, to see if my algorithm is working as expected. 
+  - Methods are swapChildrenOfAllNodes(), swapChildrenOfASpecificNode(), swapChildToLeftOrRight(). 
+  - Two tree objects are created inside the main class and they can be tested for isomorphism. I left the code for testing for you to have a better understanding of the implementation. 
+- Problem 6
+  - Binary search tree and AVL tree objects are created to be tested simultaneously. Both trees can be tested with any method there are. Note that AVL is also a subclass of a Binary Search tree, with additional method for balancing nodes.
+- Problem 7
+  - The input file plaintext.txt is analyzed and the frequency of characters are mapped together with the actual characters.
+  - The Tree is then built based on the frequency, from bottom to the top. 
+  - In Main method the iterator prints all the codes assigned to the characters within the text file, however a single character code can be obtained with huffmanTree.getCode(input) method.
+  - At the end, there is a for loop printing the entire text translated into huffman code.

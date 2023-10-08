@@ -10,8 +10,7 @@ public class Main {
 
 
         Scanner scanner = new Scanner(System.in);
-        String path = "C:/Users/dimit/tree_testing";
-        System.out.println("Provide the path of the root folder: ");
+        String path = ""; //TODO: Provide the path of a folder. Absolute paths are used.
         //String path = scanner.nextLine();
 
         Tree tree = new Tree(path);
@@ -20,7 +19,8 @@ public class Main {
         while (it.hasNext()) {
             System.out.println(it.next().getName());
         }
-        //tree.addChild(scanner);
+        //tree.addChild(scanner); //TODO: After the elements are listed in a tree, you can add an element with input
+        //TreeNode tn = tree.findTreeNode("") // TODO: Type in the name of a node to find it.
 
         System.out.println("");
     }

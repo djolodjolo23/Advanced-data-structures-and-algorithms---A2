@@ -14,13 +14,28 @@ public class Main {
 
         BinarySearchTree<Integer> binarySearchTree = new BinarySearchTree<>();
 
+        //binarySearchTree.add();
+        //binarySearchTree.remove();
+        //binarySearchTree.contains();
+        //avlTree.insert();
+        //avlTree.delete();
+        //avlTree.contains();
+
+        // TODO: both trees can be tested with any of the binary search tree metods,
+        //  note that BST method for adding and deleting is add() and remove(), while in AVL is insert() and delete().
+        //  Had to create new methods in AVL since I run into issues in balance methods when using the add and remove from a superclass BST.
+
+
+
+
+
+        /*
         Random random = new Random();
 
         helpers.Timer timer = new helpers.Timer();
 
         CSVExporter<Long> csvExporterLong = new CSVExporter<>();
         CSVExporter<Integer> csvExporterInteger = new CSVExporter<>();
-
 
 
 
@@ -49,22 +64,20 @@ public class Main {
                 int insert = random.nextInt(1, 10000000);
                 //int theI = i;
                 binarySearchTree.add(insert);
-
-
-                avlTree.addTest(insert);
+                avlTree.insert(insert);
                 if (i % 1000 == 0) {
                     bst_insert_times.add(timer.timeItNanoTime(() -> binarySearchTree.add(insert)));
                     avl_insert_times.add(timer.timeItNanoTime(() -> avlTree.add(insert)));
                     bst_height.add(binarySearchTree.getRoot().height);
                     avl_height.add(avlTree.getRoot().height);
-                    bst_find.add(timer.timeItNanoTime(() -> binarySearchTree.findNode(insert)));
-                    avl_find.add(timer.timeItNanoTime(() -> avlTree.findNode(insert)));
+                    bst_find.add(timer.timeItNanoTime(() -> binarySearchTree.contains(insert)));
+                    avl_find.add(timer.timeItNanoTime(() -> avlTree.contains(insert)));
                     BinarySearchTree.BinaryNode<Integer> node = binarySearchTree.findNodeWithIndex(random.nextInt(binarySearchTree.size())); // using iterator to find it to avoid the overhead on the timer
                     bst_remove.add(timer.timeItNanoTime(() -> binarySearchTree.remove(node.element)));
-                    avl_remove.add(timer.timeItNanoTime(() -> avlTree.remove(node.element)));
+                    avl_remove.add(timer.timeItNanoTime(() -> avlTree.delete(node.element)));
                 } else {
                     binarySearchTree.add(insert);
-                    avlTree.addTest(insert);
+                    avlTree.insert(insert);
                 }
             }
             bst_insert_times_all.add(bst_insert_times);
@@ -80,38 +93,38 @@ public class Main {
         }
 
 
-        List<Long> bst_insert_times_avg = timer.findAverageRunningTimeLong(bst_insert_times_all);
-        List<Long> avl_insert_times_avg = timer.findAverageRunningTimeLong(avl_insert_times_all);
+        List<Long> bst_insert_avg = timer.findAverageRunningTimeLong(bst_insert_times_all);
+        List<Long> avl_insert_avg = timer.findAverageRunningTimeLong(avl_insert_times_all);
         List<Integer> bst_height_avg = timer.findAverageIntegers(bst_height_all);
         List<Integer> avl_height_avg = timer.findAverageIntegers(avl_height_all);
         List<Long> bst_remove_avg = timer.findAverageRunningTimeLong(bst_remove_all);
         List<Long> avl_remove_avg = timer.findAverageRunningTimeLong(avl_remove_all);
-        List<Long> bst_find_avg = timer.findAverageRunningTimeLong(bst_find_all);
-        List<Long> avl_find_avg = timer.findAverageRunningTimeLong(avl_find_all);
+        List<Long> bst_contains_avg = timer.findAverageRunningTimeLong(bst_find_all);
+        List<Long> avl_contains_avg = timer.findAverageRunningTimeLong(avl_find_all);
 
 
-        csvExporterLong.exportTimesToCSV(bst_insert_times_avg, "bst_insert_times_avg.csv");
-        csvExporterLong.exportTimesToCSV(avl_insert_times_avg, "avl_insert_times_avg.csv");
+        csvExporterLong.exportTimesToCSV(bst_insert_avg, "bst_insert_avg.csv");
+        csvExporterLong.exportTimesToCSV(avl_insert_avg, "avl_insert_avg.csv");
         csvExporterInteger.exportTimesToCSV(bst_height_avg, "bst_height_avg.csv");
         csvExporterInteger.exportTimesToCSV(avl_height_avg, "avl_height_avg.csv");
         csvExporterLong.exportTimesToCSV(bst_remove_avg, "bst_remove_avg.csv");
         csvExporterLong.exportTimesToCSV(avl_remove_avg, "avl_remove_avg.csv");
-        csvExporterLong.exportTimesToCSV(bst_find_avg, "bst_find_avg.csv");
-        csvExporterLong.exportTimesToCSV(avl_find_avg, "avl_find_avg.csv");
+        csvExporterLong.exportTimesToCSV(bst_contains_avg, "bst_contains_avg.csv");
+        csvExporterLong.exportTimesToCSV(avl_contains_avg, "avl_contains_avg.csv");
 
 
-        System.out.println("Average bst insert time: " + timer.findAverageLong(bst_insert_times_avg));
+        System.out.println("Average bst insert time: " + timer.findAverageLong(bst_insert_avg));
         System.out.println("Average bst height: " + timer.findAverageInt(bst_height_avg));
         System.out.println("Average bst remove time: " + timer.findAverageLong(bst_remove_avg));
-        System.out.println("Average bst find time: " + timer.findAverageLong(bst_find_avg));
+        System.out.println("Average bst find time: " + timer.findAverageLong(bst_contains_avg));
         System.out.println();
-        System.out.println("Average avl insert time: " + timer.findAverageLong(avl_insert_times_avg));
+        System.out.println("Average avl insert time: " + timer.findAverageLong(avl_insert_avg));
         System.out.println("Average avl height: " + timer.findAverageInt(avl_height_avg));
         System.out.println("Average avl remove time: " + timer.findAverageLong(avl_remove_avg));
-        System.out.println("Average avl find time: " + timer.findAverageLong(avl_find_avg));
+        System.out.println("Average avl find time: " + timer.findAverageLong(avl_contains_avg));
 
 
-
+        */
 
 
 

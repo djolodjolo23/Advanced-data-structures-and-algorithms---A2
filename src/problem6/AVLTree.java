@@ -8,7 +8,7 @@ public class AVLTree<AnyType extends Comparable<? super AnyType>> extends Binary
     public AVLTree() {
     }
 
-    public void addTest(AnyType x) {
+    public void insert(AnyType x) {
         root = insert(x, root);
     }
 
@@ -50,12 +50,27 @@ public class AVLTree<AnyType extends Comparable<? super AnyType>> extends Binary
     }
 
 
-    public void remove(AnyType x) {
+    public void delete(AnyType x) {
         root = delete(x, root);
     }
 
-    protected BinaryNode<AnyType> delete(AnyType x, BinaryNode<AnyType> t) {
-        return balance(super.remove(x, root));
+    private BinaryNode<AnyType> delete(AnyType x, BinaryNode<AnyType> t) {
+        if (t == null) {
+            return null; // item not found, do nothing
+        }
+        int compareResult = x.compareTo(t.element);
+        if (compareResult < 0) {
+            t.left = delete(x, t.left);
+        } else if (compareResult > 0) {
+            t.right = delete(x, t.right);
+        } else if (t.left != null && t.right != null) {
+            t.element = findMin(t.right).element;
+            t.right = delete(t.element, t.right);
+        } else {
+            t = (t.left != null) ? t.left : t.right;
+            theSize--;
+        }
+        return balance(t);
     }
 
 
