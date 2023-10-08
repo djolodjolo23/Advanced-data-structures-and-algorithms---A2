@@ -7,28 +7,42 @@ import java.util.*;
 
 public class LetterFrequencyAnalyzer {
     public static Map<Character, Integer> analyzeFile(String fileName) {
-        Map<Character, Integer> letterFrequency = new HashMap<>();
+        Map<Character, Integer> characterFrequency = new HashMap<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                line = line.toLowerCase(); // Convert the line to lowercase
-                for (char c : line.toCharArray()) {
-                    if (Character.isLetter(c)) {
-                        if (letterFrequency.containsKey(c)) {
-                            letterFrequency.put(c, letterFrequency.get(c) + 1);
-                        } else {
-                            letterFrequency.put(c, 1);
-                        }
-                    }
+            int charInt;
+            while ((charInt = br.read()) != -1) {
+                char c = Character.toLowerCase((char) charInt); // Convert character to lowercase
+                if (characterFrequency.containsKey(c)) {
+                    characterFrequency.put(c, characterFrequency.get(c) + 1);
+                } else {
+                    characterFrequency.put(c, 1);
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return letterFrequency;
+        return characterFrequency;
     }
+
+    public static String getTextInAString(String fileName) {
+        StringBuilder characters = new StringBuilder();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+            int charInt;
+            while ((charInt = br.read()) != -1) {
+                char c = Character.toLowerCase((char) charInt); // Convert character to lowercase
+                characters.append(c);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return characters.toString();
+    }
+
+
 
     public static List<Map.Entry<Character, Integer>> sortMapByValue(Map<Character, Integer> map) {
         List<Map.Entry<Character, Integer>> list = new ArrayList<>(map.entrySet());
