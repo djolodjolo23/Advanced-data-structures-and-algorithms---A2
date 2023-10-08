@@ -22,6 +22,9 @@ public class Main {
         CSVExporter<Integer> csvExporterInteger = new CSVExporter<>();
 
 
+
+
+
         List<List<Long>> bst_insert_times_all = new ArrayList<>();
         List<List<Long>> avl_insert_times_all = new ArrayList<>();
         List<List<Integer>> bst_height_all = new ArrayList<>();
@@ -42,30 +45,26 @@ public class Main {
             List<Long> bst_find = new ArrayList<>();
             List<Long> avl_find = new ArrayList<>();
 
-            for (int i = 1; i <= 10000; i++) {
-                //int insert = random.nextInt(1, 10000000);
-                int theI = i;
-                binarySearchTree.add(theI);
-                avlTree.add(theI);
-                if (i < 100) {
-                    if (i % 10 == 0) {
-                        bst_height.add(binarySearchTree.getRoot().height);
-                        avl_height.add(avlTree.getRoot().height);
-                    }
-                }
-                if (i % 100 == 0) {
-                    bst_insert_times.add(timer.timeItNanoTime(() -> binarySearchTree.add(theI)));
-                    avl_insert_times.add(timer.timeItNanoTime(() -> avlTree.add(theI)));
+            for (int i = 1; i <= 500000; i++) {
+                int insert = random.nextInt(1, 10000000);
+                //int theI = i;
+                binarySearchTree.add(insert);
+
+
+                avlTree.addTest(insert);
+                if (i % 1000 == 0) {
+                    bst_insert_times.add(timer.timeItNanoTime(() -> binarySearchTree.add(insert)));
+                    avl_insert_times.add(timer.timeItNanoTime(() -> avlTree.add(insert)));
                     bst_height.add(binarySearchTree.getRoot().height);
                     avl_height.add(avlTree.getRoot().height);
-                    bst_find.add(timer.timeItNanoTime(() -> binarySearchTree.findNode(theI)));
-                    avl_find.add(timer.timeItNanoTime(() -> avlTree.findNode(theI)));
+                    bst_find.add(timer.timeItNanoTime(() -> binarySearchTree.findNode(insert)));
+                    avl_find.add(timer.timeItNanoTime(() -> avlTree.findNode(insert)));
                     BinarySearchTree.BinaryNode<Integer> node = binarySearchTree.findNodeWithIndex(random.nextInt(binarySearchTree.size())); // using iterator to find it to avoid the overhead on the timer
                     bst_remove.add(timer.timeItNanoTime(() -> binarySearchTree.remove(node.element)));
                     avl_remove.add(timer.timeItNanoTime(() -> avlTree.remove(node.element)));
                 } else {
-                    binarySearchTree.add(theI);
-                    avlTree.add(theI);
+                    binarySearchTree.add(insert);
+                    avlTree.addTest(insert);
                 }
             }
             bst_insert_times_all.add(bst_insert_times);

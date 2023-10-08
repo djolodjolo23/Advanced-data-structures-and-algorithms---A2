@@ -8,14 +8,23 @@ public class AVLTree<AnyType extends Comparable<? super AnyType>> extends Binary
     public AVLTree() {
     }
 
-    public void add(AnyType x) {
-        root = balance(super.add(x, root));
+    public void addTest(AnyType x) {
+        root = insert(x, root);
     }
 
-    public void remove(AnyType x) {
-        balance(super.remove(x, root));
+    private BinaryNode<AnyType> insert(AnyType x, BinaryNode<AnyType> t) {
+        if (t == null) {
+            theSize++;
+            return new BinaryNode<>(x, null, null); // no more nodes to traverse
+        }
+        int compareResult = x.compareTo(t.element);
+        if (compareResult < 0) {
+            t.left = insert(x, t.left);
+        } else if (compareResult > 0) {
+            t.right = insert(x, t.right);
+        }
+        return balance(t);
     }
-
 
 
     private BinaryNode<AnyType> balance(BinaryNode<AnyType> t) {
@@ -23,7 +32,7 @@ public class AVLTree<AnyType extends Comparable<? super AnyType>> extends Binary
             return null;
         }
         if (height(t.left) - height(t.right) > 1) {
-            if (height(t.left.left) >=height(t.left.right)) {
+            if (height(t.left.left) >= height(t.left.right)) {
                 t = rotateLeft(t);
             } else {
                 t = doubleLeft(t);
@@ -31,7 +40,7 @@ public class AVLTree<AnyType extends Comparable<? super AnyType>> extends Binary
         }
         else if (height(t.right) - height(t.left) > 1) {
             if (height(t.right.right) >= height(t.right.left)) {
-                t = rotateRight(t);
+                t = rotateRight(t); // with rotation the new root is assigned
             } else {
                 t = doubleRight(t);
             }
@@ -40,6 +49,14 @@ public class AVLTree<AnyType extends Comparable<? super AnyType>> extends Binary
         return t;
     }
 
+
+    public void remove(AnyType x) {
+        root = delete(x, root);
+    }
+
+    protected BinaryNode<AnyType> delete(AnyType x, BinaryNode<AnyType> t) {
+        return balance(super.remove(x, root));
+    }
 
 
     private BinaryNode<AnyType> rotateLeft(BinaryNode<AnyType> t2){

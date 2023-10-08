@@ -14,6 +14,7 @@ public class Main {
 
         List<Map.Entry<Character, Integer>> letterFrequencySorted = LetterFrequencyAnalyzer.sortMapByValue(letterFrequency);
 
+        String fullText = "";
 
         for (Map.Entry<Character, Integer> entry : letterFrequencySorted) {
             System.out.println(entry.getKey() + ": " + entry.getValue());
